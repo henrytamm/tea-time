@@ -1,0 +1,10 @@
+from .db import db, environment, SCHEMA, add_prefix_for_prod
+
+server_members = db.Table(
+    "server_members",
+    db.Column("server_id", db.Integer, db.ForeignKey(add_prefix_for_prod("servers.id"), ondelete="CASCADE"), primary_key=True),
+    db.Column("user_id", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), primary_key=True),
+)
+
+if environment == "production":
+    server_members.schema = SCHEMA
