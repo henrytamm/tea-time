@@ -1,4 +1,4 @@
-from app.models import Server, db, environment, SCHEMA
+from app.models import Server, db, environment, SCHEMA, User
 from sqlalchemy.sql import text
 
 def seed_servers():
@@ -32,11 +32,38 @@ def seed_servers():
         owner_id=1
     )
 
+    user1 = User(
+        id = 1,
+        username = "Demo",
+        profile_img = "https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp",
+    )
+
+    user2 = User(
+        id = 2,
+        username = "Marnie",
+        profile_img = "https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp",
+    )
+
+    user3 = User(
+        id = 3,
+        username = "Bobbie",
+        profile_img = "https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp",
+    )
+
+    gossip_girls.users.append(user1)
+    gossip_girls.users.append(user2)
+    gossip_girls.users.appen(user3)
+    tea_time.users.append(user1)
+
     db.session.add(gossip_girls)
     db.session.add(tea_time)
     db.session.add(last_straw)
     db.session.add(app_academy)
     db.session.add(therapy_session)
+
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.add(user3)
     
     db.session.commit()
 

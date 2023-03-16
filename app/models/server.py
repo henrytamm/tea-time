@@ -12,8 +12,9 @@ class Server(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     server_img = db.Column(db.String)
     
-    channel = db.relationship("Channel", back_populates="server", cascade="all, delete")
+    channel = db.relationship("Channel", back_populates="server", cascade="all, delete-orphan")
     user = db.relationship("User", secondary=server_members, cascade="all, delete-orphan", back_populates="server")
+    message = db.relationship("Message", back_populates='server', cascade="all, delete-orphan")
 
 
     def to_dict(self):

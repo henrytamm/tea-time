@@ -5,11 +5,11 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', email='demo@aa.io', password='password', profile_img="https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp")
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', email='marnie@aa.io', password='password', profile_img="https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp")
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='bobbie', email='bobbie@aa.io', password='password', profile_img="https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp")
 
     db.session.add(demo)
     db.session.add(marnie)
