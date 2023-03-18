@@ -1,5 +1,6 @@
 const GET_SERVERS = "servers/GET_SERVERS"
 const GET_ONE_SERVER = "servers/GET_ONE_SERVER"
+const GET_USER_SERVERS = "servers/GET_USER_SERVERS"
 const CREATE_SERVER = "servers/CREATE_SERVER"
 const EDIT_SERVER = "servers/EDIT_SERVER"
 const DELETE_SERVER = "servers/DELETE_SERVER"
@@ -13,6 +14,11 @@ const getServersAction = (servers) => ({
 const getOneServerAction = (server) => ({
     type: GET_ONE_SERVER,
     server
+})
+
+const getUserServersAction = (servers) => ({
+    type: GET_USER_SERVERS,
+    servers
 })
 
 const createServerAction = (server) => ({
@@ -48,20 +54,33 @@ export const getOneServer = (serverId) => async (dispatch) => {
     }
 }
 
+export const getUserServers = () => async (dispatch) => {
+    const res = await fetch (`/api/users/servers`)
+    if (res.ok) {
+        const userServers = await res.json();
+        dispatch(getUserServersAction(userServers))
+        return userServers
+    }
+}
+
 const initialState = {};
 
 export const serverReducer = (state = initialState, action) => {
     let newState = { ...state }
     switch (action.type) {
         case GET_SERVERS: {
-            action.servers.servers.forEach((el) => {
+            action.servers.forEach((el) => {
                 newState[el.id] = el
             });
             return newState;
         }
 
         case GET_ONE_SERVER: {
-            return action.server
+            return {...action.server}
+        }
+
+        case GET_USER_SERVERS: {
+            return {...newState, ...action.servers}
         }
 
         default: {

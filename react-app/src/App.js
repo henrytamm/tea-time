@@ -6,6 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage/Homepage"
+import ChannelMain from "./components/Channels/ChannelMain";
+import ChannelList from "./components/Channels/ChannelList";
+import MessageList from "./components/Chatbox/MessageList";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +27,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/:serverId/:channelId?">
+            <ChannelList />
           </Route>
           <Route path="/">
             <Homepage />

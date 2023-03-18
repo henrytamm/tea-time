@@ -6,21 +6,11 @@ from ..forms.message import MessageForm
 message_routes = Blueprint('messages', __name__)
 
 
-@message_routes.route('/<int:channelId>')
-@login_required
-def get_all_messages(channel_id):
+@message_routes.route('/<int:serverId>/<int:channelId>')
+# @login_required
+def get_all_messages(serverId, channelId):
     """
     Query for all messages in a channel
     """
-    messages = Message.query.filter(Message.channel_id==channel_id).all()
-    return {'messages': [message.to_dict() for message in messages]}
-
-
-@message_routes.route('/<int:id>')
-@login_required
-def get_one_server_by_id():
-    """
-    Query for one message in a channel
-    """
-    messages = Message.query.get(id)
-    return messages.to_dict()
+    messages = Message.query.filter_by(server_id=serverId, channel_id=channelId)
+    return {"messages": [message.to_dict() for message in messages]}

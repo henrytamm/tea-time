@@ -23,4 +23,5 @@ class Server(db.Model):
             'ownerId': self.owner_id,
             'name': self.name,
             'serverImg': self.server_img,
+            # 'channels': [channel.to_dict() for channel in self.channel]
         }

@@ -26,6 +26,7 @@ class Message(db.Model):
             'id': self.id,
             'userId': self.user_id,
             'channelId': self.channel_id,
+            'serverId': self.server_id,
             'message': self.message,
             'img': self.img,
         }

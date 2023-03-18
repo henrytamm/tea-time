@@ -6,24 +6,13 @@ from ..forms.channel_form import ChannelForm
 channel_routes = Blueprint('channels', __name__)
 
 
-@channel_routes.route('/')
-# @login_required
-def get_all_channels_in_server():
-    """
-    Query for all channels in a server
-    """
-    channels = Channel.query.all()
-    return {'channels': [channel.to_dict() for channel in channels]}
+# @channel_routes.route('/<int:serverId>/channels')
+# # @login_required
+# def get_channels(serverId):
+#     channels = Channel.query.filter(Channel.server_id == serverId).all()
+#     return {'channels': [channel.to_dict() for channel in channels]}
 
-
-@channel_routes.route('/<int:id>')
-# @login_required
-def get_one_channel_by_id(id):
-    """
-    Query for one channel by id
-    """
-    channel = Channel.query.get(id)
-    return channel.to_dict()
-
-
-
+@channel_routes.route("/<int:serverId>/channels")
+def get_all_channels(serverId):
+  channels = Channel.query.filter(Channel.server_id == serverId)
+  return {'channels': [channel.to_dict() for channel in channels]}
