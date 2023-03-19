@@ -6,9 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage/Homepage"
-import ChannelMain from "./components/Channels/ChannelMain";
-import ChannelList from "./components/Channels/ChannelList";
-import MessageList from "./components/Chatbox/MessageList";
+import ChannelMain from "./components/Full Compnent/Channels/ChannelMain";
+import ChannelList from "./components/Full Compnent/Channels/ChannelList";
+import MessageList from "./components/Full Compnent/Chatbox/MessageList";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,8 +28,12 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path="/:serverId">
+            <ChannelList />
+          </Route>
           <Route exact path="/:serverId/:channelId?">
             <ChannelList />
+            <MessageList />
           </Route>
           <Route path="/">
             <Homepage />

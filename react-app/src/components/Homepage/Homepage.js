@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import NavServerBar from "../Navigation/NavServerBar";
 import { getServers, getUserServers } from "../../store/servers";
+import { getChannels } from "../../store/channels";
 
 function Homepage() {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function Homepage() {
         dispatch(getUserServers(user.id))
     }, [dispatch])
 
-    console.log('server name', serverArr[0])
+  
 
     return (
         <>
