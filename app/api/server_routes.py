@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import Server
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
+from app.models import Server, db, Channel, server_members
 from ..forms.server_form import ServerForm
+from ..forms.channel_form import ChannelForm
 
 server_routes = Blueprint('servers', __name__)
 
@@ -24,3 +25,59 @@ def get_one_server(serverId):
     """
     server = Server.query.get(serverId)
     return server.to_dict()
+
+
+@server_routes.route("/", methods=["POST"])
+# @login_required
+def create_server():
+    """
+    Create a new server with a general channel
+    """
+    form = ServerForm()
+
+    server = Server(
+        name=form.data["name"],
+        owner_id=current_user.get_id(),
+        server_img=form.data["server_img"],
+    )
+
+    db.session.add(server)
+    db.session.commit()
+
+    channel = Channel(
+        server_id=server.id,
+        name="general"
+    )
+
+    db.session.add(channel)
+    db.session.commit()
+
+    member = server_members(
+        user_id=current_user.get_id(),
+        server_id=server.id
+    )
+
+    db.session.add(member)
+    db.session.commit()
+
+    return jsonify(server.to_dict())
+
+
+
+@server_routes.route("/<int:serverId>/channels", methods=[ "POST" ])
+def create_channel(serverId):
+  """
+  Create a new channel in a server
+  """
+  form = ChannelForm()
+#   server = Server.query.get(serverId)
+
+  new_channel = Channel (
+    server_id = serverId,
+    name=form.data["name"]
+  )
+
+  db.session.add(new_channel)
+  db.session.commit()
+
+  return jsonify(new_channel.to_dict())

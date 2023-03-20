@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getServers, getUserServers } from "../../store/servers";
 import { getChannels } from "../../store/channels";
+import CreateServerModal from "../Modals/CreateServerModal/CreateServerModal";
 
 function NavServerBar() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function NavServerBar() {
             );
           })}
         </ul>
+        <div>
+          <CreateServerModal />
+        </div>
       </div>
     </>
   );

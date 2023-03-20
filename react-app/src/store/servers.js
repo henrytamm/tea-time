@@ -63,6 +63,20 @@ export const getUserServers = () => async (dispatch) => {
     }
 }
 
+export const createServer = (server) => async (dispatch) => {
+    const res = await fetch (`/api/servers/`, {
+        method: "POST",
+        // headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(server)
+    });
+
+    if (res.ok) {
+        const server = await res.json();
+        dispatch(createServerAction(server))
+        return server
+    }
+}
+
 const initialState = {};
 
 export const serverReducer = (state = initialState, action) => {
@@ -81,6 +95,11 @@ export const serverReducer = (state = initialState, action) => {
 
         case GET_USER_SERVERS: {
             return {...newState, ...action.servers}
+        }
+
+        case CREATE_SERVER: {
+            newState[action.server.id] = action.server;
+            return newState
         }
 
         default: {
