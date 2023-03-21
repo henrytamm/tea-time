@@ -63,7 +63,27 @@ def create_server():
 
     return jsonify(server.to_dict())
 
+@server_routes.route("/<int:serverId>", methods=['PUT'])
+def edit_server(serverId):
+    """
+    Edit server
+    """
+    server = Server.query.get(serverId)
+    form = ServerForm()
+    server.name = form.data['name']
+    server.server_img = form.data['server_img']
+    db.session.commit()
+    return jsonify(server.to_dict())
 
+@server_routes.route("/<int:serverId>", methods=["DELETE"])
+def delete_server(serverId):
+    """
+    Delete server
+    """
+    server = Server.query.get(serverId)
+    db.session.delete(server)
+    db.session.commit()
+    return "Server deleted!"
 
 @server_routes.route("/<int:serverId>/channels/new", methods=[ "POST" ])
 def create_channel(serverId):

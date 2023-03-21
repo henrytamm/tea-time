@@ -77,6 +77,30 @@ export const createServer = (payload) => async (dispatch) => {
     return res
 }
 
+export const editServer = (serverId, payload) => async (dispatch) => {
+    const res = await fetch (`/api/servers/${serverId}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        const server = await res.json();
+        dispatch(editServerAction(server))
+        return server
+    }
+    return res
+}
+
+export const deleteServer = (serverId) => async (dispatch) => {
+    const res = await fetch (`/api/servers/${serverId}`, {
+        method: "DELETE"
+    })
+    if (res.ok) {
+        dispatch(deleteServerAction)
+    }
+}
+
 const initialState = {};
 
 export const serverReducer = (state = initialState, action) => {
@@ -98,6 +122,16 @@ export const serverReducer = (state = initialState, action) => {
         }
 
         case CREATE_SERVER: {
+            newState[action.server.id] = action.server;
+            return newState
+        }
+
+        case DELETE_SERVER: {
+            delete newState[action.server]
+            return newState;
+        }
+
+        case EDIT_SERVER: {
             newState[action.server.id] = action.server;
             return newState
         }

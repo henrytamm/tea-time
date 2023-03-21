@@ -6,8 +6,10 @@ import { getUserServers, getOneServer } from "../../../store/servers";
 import { getChannels } from "../../../store/channels"
 import { useState } from "react";
 import { getMessages } from "../../../store/messages";
+import { deleteServer } from "../../../store/servers";
 import OpenModalButton from "../../OpenModalButton";
 import CreateChannelModal from "../../Modals/CreateChannelModal/CreateChannelModal";
+import EditServerModal from "../../Modals/EditServerModal/EditServerModal";
 
 const ChannelList = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,16 @@ const ChannelList = () => {
       dispatch(getChannels(serverId))
     })
   }, [dispatch, serverId, channelId]);
+
+  const deleteServerHandler = () => {
+    const deleteConfirm = window.confirm(
+      `Are you sure you want to delete this server?`
+    );
+    if (deleteConfirm) {
+      dispatch(deleteServer(serverId))
+      history.push(`/`)
+    }
+  }
 
 
 
@@ -60,6 +72,17 @@ const ChannelList = () => {
           modalComponent={<CreateChannelModal />}
           />
         </div>
+
+        <div>
+          <OpenModalButton
+          buttonText={"Edit Server"}
+          modalComponent={<EditServerModal />}
+          />
+        </div>
+        <button onClick={deleteServerHandler}>
+          Delete Server
+        </button>
+
       </div>
     </div>
   );

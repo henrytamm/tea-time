@@ -12,16 +12,18 @@ function Homepage() {
     const server = useSelector((state) => state.serverReducer);
     const serverArr = server ? Object.values(server) : null;
 
-    useEffect(() => {
-        dispatch(getUserServers(user.id))
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getUserServers(user.id))
+    // }, [dispatch])
 
   
 
     return (
         <>
         <div>
+            {user &&
             <NavServerBar />
+            }
         </div>
         </>
     )
