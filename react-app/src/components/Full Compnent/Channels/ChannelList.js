@@ -6,6 +6,8 @@ import { getUserServers, getOneServer } from "../../../store/servers";
 import { getChannels } from "../../../store/channels"
 import { useState } from "react";
 import { getMessages } from "../../../store/messages";
+import OpenModalButton from "../../OpenModalButton";
+import CreateChannelModal from "../../Modals/CreateChannelModal/CreateChannelModal";
 
 const ChannelList = () => {
   const dispatch = useDispatch();
@@ -17,8 +19,13 @@ const ChannelList = () => {
   const channels = Object.values(useSelector((state) => state.channelReducer));
 
   useEffect(() => {
-    dispatch(getChannels(serverId))
-  }, [dispatch, serverId]);
+    dispatch(getOneServer(serverId))
+    .then(() => {
+      dispatch(getChannels(serverId))
+    })
+  }, [dispatch, serverId, channelId]);
+
+
 
 
   // useEffect(() => {
@@ -47,6 +54,12 @@ const ChannelList = () => {
             </div>
           );
         })}
+        <div>
+          <OpenModalButton
+          buttonText={"Create Channel"}
+          modalComponent={<CreateChannelModal />}
+          />
+        </div>
       </div>
     </div>
   );

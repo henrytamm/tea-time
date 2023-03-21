@@ -54,8 +54,8 @@ export const getOneServer = (serverId) => async (dispatch) => {
     }
 }
 
-export const getUserServers = () => async (dispatch) => {
-    const res = await fetch (`/api/users/servers`)
+export const getUserServers = (userId) => async (dispatch) => {
+    const res = await fetch (`/api/users/${userId}/servers`)
     if (res.ok) {
         const userServers = await res.json();
         dispatch(getUserServersAction(userServers))
@@ -63,18 +63,18 @@ export const getUserServers = () => async (dispatch) => {
     }
 }
 
-export const createServer = (server) => async (dispatch) => {
+export const createServer = (payload) => async (dispatch) => {
     const res = await fetch (`/api/servers/`, {
         method: "POST",
-        // headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(server)
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(payload)
     });
 
     if (res.ok) {
         const server = await res.json();
         dispatch(createServerAction(server))
-        return server
     }
+    return res
 }
 
 const initialState = {};

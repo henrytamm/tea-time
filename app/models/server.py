@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
-from .server_members import server_members
 
 class Server(db.Model):
     __tablename__ = 'servers'
@@ -13,8 +12,9 @@ class Server(db.Model):
     server_img = db.Column(db.String)
     
     channel = db.relationship("Channel", back_populates="server", cascade="all, delete")
-    user = db.relationship("User", secondary=server_members, cascade="all, delete", back_populates="server")
+    user = db.relationship("User", cascade="all, delete", back_populates="server")
     message = db.relationship("Message", back_populates='server', cascade="all, delete")
+    server_member = db.relationship("ServerMember", back_populates='server', cascade="all, delete")
 
 
     def to_dict(self):

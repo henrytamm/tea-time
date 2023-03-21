@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { getServers, getUserServers } from "../../store/servers";
 import { getChannels } from "../../store/channels";
 import CreateServerModal from "../Modals/CreateServerModal/CreateServerModal";
+import OpenModalButton from "../OpenModalButton";
 
 function NavServerBar() {
   const dispatch = useDispatch();
@@ -33,7 +34,10 @@ function NavServerBar() {
           })}
         </ul>
         <div>
-          <CreateServerModal />
+          <OpenModalButton
+          buttonText={"Create Server"}
+          modalComponent={<CreateServerModal />}
+          />
         </div>
       </div>
     </>

@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Server, db, Channel, server_members
+from app.models import Server, db, Channel, ServerMember
 from ..forms.server_form import ServerForm
 from ..forms.channel_form import ChannelForm
+
 
 server_routes = Blueprint('servers', __name__)
 
@@ -52,7 +53,7 @@ def create_server():
     db.session.add(channel)
     db.session.commit()
 
-    member = server_members(
+    member = ServerMember(
         user_id=current_user.get_id(),
         server_id=server.id
     )
@@ -64,7 +65,7 @@ def create_server():
 
 
 
-@server_routes.route("/<int:serverId>/channels", methods=[ "POST" ])
+@server_routes.route("/<int:serverId>/channels/new", methods=[ "POST" ])
 def create_channel(serverId):
   """
   Create a new channel in a server

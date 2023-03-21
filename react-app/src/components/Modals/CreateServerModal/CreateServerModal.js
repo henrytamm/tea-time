@@ -4,9 +4,11 @@ import { createServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
 
 const CreateServerModal = () => {
+    //rendered in NavServerBar*
     const [name, setName] = useState("");
     const [serverImg, setServerImg] = useState("");
     const dispatch = useDispatch();
+    const { closeModal } = useModal()
   
 
   const handleSubmit = async (e) => {
@@ -17,14 +19,15 @@ const CreateServerModal = () => {
     };
 
     await dispatch(createServer(payload));
+    closeModal()
   };
 
   return (
     <div className="create-server-modal">
-      <div className="create-server-modal-content">
-        <h2>Create a Server</h2>
+      <div className="create-server-modal-body">
+        <header>Create a Server</header>
         <form onSubmit={handleSubmit}>
-          <div className="input-container">
+          <div className="modal-input-container">
             <label>Server Name</label>
             <input
               type="text"
@@ -34,7 +37,7 @@ const CreateServerModal = () => {
               required
             />
           </div>
-          <div className="input-container">
+          <div className="modal-input-container">
             <label>Server Image</label>
             <input
               type="text"
@@ -43,7 +46,7 @@ const CreateServerModal = () => {
               onChange={(e) => setServerImg(e.target.value)}
             />
           </div>
-          <div className="button-container">
+          <div className="modal-button-container">
             <button type="submit">Create</button>
           </div>
         </form>

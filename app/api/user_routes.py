@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import User, Server
+from app.models import User, Server, ServerMember
 
 user_routes = Blueprint('users', __name__)
 
@@ -25,24 +25,30 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/servers')
+# @user_routes.route('/servers')
+# # @login_required
+# def user_servers():
+#     """
+#     Query for servers that a user is in/belongs to
+#     """
+#     server_list = []
+#     dict = {}
+#     servers = Server.query.all()
+
+#     for server in servers:
+#         users = server.user
+
+#         for user in users:
+#             if user.id == current_user.id:
+#                 server_list.append(server)
+
+#     for server in server_list:
+#         dict[f'{server.id}'] = server.to_dict()
+
+#     return dict
+
+@user_routes.route('/<int:id>/servers')
 # @login_required
-def user_servers():
-    """
-    Query for servers that a user is in/belongs to
-    """
-    server_list = []
-    dict = {}
-    servers = Server.query.all()
-
-    for server in servers:
-        users = server.user
-
-        for user in users:
-            if user.id == current_user.id:
-                server_list.append(server)
-
-    for server in server_list:
-        dict[f'{server.id}'] = server.to_dict()
-
-    return dict
+def user_servers(id):
+   servers = Server.query.join(ServerMember).filter(ServerMember.user_id == current_user.id).all()
+   return jsonify([server.to_dict() for server in servers])

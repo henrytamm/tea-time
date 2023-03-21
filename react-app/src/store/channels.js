@@ -8,6 +8,12 @@ const getChannelsAction = (channels) => ({
     channels
 })
 
+
+const createChannelAction = (channel) => ({
+    type: CREATE_CHANNEL,
+    channel
+})
+
 export const getChannels = (serverId) => async (dispatch) => {
     const res = await fetch(`/api/channels/${serverId}/channels`)
     if (res.ok) {
@@ -16,6 +22,21 @@ export const getChannels = (serverId) => async (dispatch) => {
     }
     return res
 }
+
+export const createChannel = (serverId, payload) => async (dispatch) => {
+    const res = await fetch (`/api/servers/${serverId}/channels/new`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    if (res.ok) {
+        const channel = await res.json();
+        dispatch(createChannelAction(channel))
+    }
+    return res
+}
+
+
 
 const initialState = {}
 
@@ -27,6 +48,11 @@ export const channelReducer = (state = initialState, action) => {
             action.channels.channels.forEach((channel) => {
                 newState[channel.id] = channel
             });
+            return newState
+        }
+
+        case CREATE_CHANNEL: {
+            newState[action.channel.id] = action.channel;
             return newState
         }
 

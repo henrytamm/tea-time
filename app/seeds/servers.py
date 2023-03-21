@@ -1,7 +1,7 @@
 from app.models import Server, db, environment, SCHEMA, User
 from sqlalchemy.sql import text
 
-def seed_servers_users():
+def seed_servers():
     gossip_girls = Server (
         name="Gossip Girls",
         server_img="https://imgs.search.brave.com/WpXXhLg5kTkTbkY0xrTqPNqz3HETaKaxucpmqmpsQtg/rs:fit:1200:1200:1/g:ce/aHR0cDovLzMuYnAu/YmxvZ3Nwb3QuY29t/Ly1XWDMtS3dCY0ps/VS9VTTVERHhGVkFh/SS9BQUFBQUFBQ0pq/WS8ycmU3RV9WODJS/cy9zMTYwMC9nb3Nz/aXBfZ2lybF9wb3N0/ZXI2My5qcGc",
@@ -32,48 +32,16 @@ def seed_servers_users():
         owner_id=1
     )
 
-    demo = User(
-        id=1,
-        username='Demo', 
-        email='demo@aa.io', 
-        password='password', 
-        profile_img="https://imgs.search.brave.com/-YsH1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp"
-    )
-
-    marnie = User(
-        id= 2,
-        username='marnie', 
-        email='marnie@aa.io', 
-        password='password', 
-        profile_img="https://imgs.search.brave.com/-Ysa1BkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp"
-    )
-
-    bobbie = User(
-        id = 3, 
-        username='bobbie', 
-        email='bobbie@aa.io', 
-        password='password', 
-        profile_img="https://imgs.search.brave.com/-YsH1aBkCXGVbYgIh3TVw6ni9uJEYIVpRdF31KsabiM0/rs:fit:844:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/VmdONC1DbWhoLWJZ/eG90amJXejNRSGFF/SyZwaWQ9QXBp"
-    )
-
-    gossip_girls.user.append(demo)
-    gossip_girls.user.append(marnie)
-    gossip_girls.user.append(bobbie)
-    tea_time.user.append(demo)
-
     db.session.add(gossip_girls)
     db.session.add(tea_time)
     db.session.add(last_straw)
     db.session.add(app_academy)
     db.session.add(therapy_session)
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
     
     db.session.commit()
 
-def undo_servers_users():
+def undo_servers():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.servers RESTART IDENTITY CASCADE;")
     else:
