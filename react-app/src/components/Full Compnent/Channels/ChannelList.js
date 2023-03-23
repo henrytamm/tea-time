@@ -3,13 +3,14 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getUserServers, getOneServer } from "../../../store/servers";
-import { getChannels } from "../../../store/channels"
+import { deleteChannel, getChannels } from "../../../store/channels"
 import { useState } from "react";
-import { getMessages } from "../../../store/messages";
 import { deleteServer } from "../../../store/servers";
 import OpenModalButton from "../../OpenModalButton";
 import CreateChannelModal from "../../Modals/CreateChannelModal/CreateChannelModal";
 import EditServerModal from "../../Modals/EditServerModal/EditServerModal";
+import EditChannelModal from "../../Modals/EditChannelModal/EditChannelModal";
+import ChannelCard from "./ChannelCard";
 
 const ChannelList = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,16 @@ const ChannelList = () => {
   const server = useSelector((state) => state.serverReducer);
   const channels = Object.values(useSelector((state) => state.channelReducer));
 
+  const isOwner = user.id === server.ownerId
+  console.log(channels)
+
   useEffect(() => {
     dispatch(getOneServer(serverId))
     .then(() => {
       dispatch(getChannels(serverId))
+      .then(() => {
+        setIsLoaded(true)
+      })
     })
   }, [dispatch, serverId, channelId]);
 
@@ -38,54 +45,67 @@ const ChannelList = () => {
   }
 
 
-
-
-  // useEffect(() => {
-  //     dispatch(getUserServers(user.id))
-  //     .then(()=> {
-  //         dispatch(getChannels(serverId))
-  //     })
-  //     .then(() => {
-  //         dispatch(getMessages(serverId, channelId))
-  //     })
-  //     .then(() => setIsLoaded(true))
-  // }, [dispatch])
   return (
-    <div className="channels-container">
-      <header className="channels-header">TEXT CHANNELS</header>
-      <div className="all-channels">
-        {channels.map((channel, i) => {
+    <div className="channel-list-container">
+      <header className="channel-list-header">TEXT CHANNELS</header>
+      <div className="all-channels-list">
+        {channels.map((channel) => {
           return (
-            <div className="channel-link-container" key={i}>
-              <NavLink
-                className="channel-link"
-                to={`/${serverId}/${channel.id}`}
-              >
-                <div className="channel-name">{channel.name}</div>
-              </NavLink>
-            </div>
-          );
+            <ChannelCard key={channel.id} channel={channel} serverId={serverId} />
+          )
         })}
-        <div>
-          <OpenModalButton
-          buttonText={"Create Channel"}
-          modalComponent={<CreateChannelModal />}
-          />
-        </div>
-
-        <div>
-          <OpenModalButton
-          buttonText={"Edit Server"}
-          modalComponent={<EditServerModal />}
-          />
-        </div>
-        <button onClick={deleteServerHandler}>
-          Delete Server
-        </button>
-
       </div>
     </div>
-  );
-};
+  )
+      }
 
-export default ChannelList;
+
+  
+//   return (
+//     <div className="channels-container">
+//       <header className="channels-header">TEXT CHANNELS</header>
+//       <div className="all-channels">
+//         {channels.map((channel, i) => {
+//           return (
+//             <div className="channel-link-container" key={i}>
+//               <NavLink
+//                 className="channel-link"
+//                 to={`/${serverId}/${channel.id}`}
+//               >
+//                 <div className="channel-name">{channel.name}</div>
+//               </NavLink>
+//               {isOwner && <div className="edit-channel-btn">
+//                  <OpenModalButton
+//                  buttonText={"Edit Channel"}
+//                  modalComponent={<EditChannelModal channel={channel}/>}
+//                  />
+//                  </div>}
+//             </div>
+//           );
+//         })}
+//         <div>
+//           <OpenModalButton
+//           buttonText={"Create Channel"}
+//           modalComponent={<CreateChannelModal />}
+//           />
+//         </div>
+
+//         <div>
+//           <OpenModalButton
+//           buttonText={"Edit Server"}
+//           modalComponent={<EditServerModal />}
+//           />
+//         </div>
+        // <button onClick={deleteServerHandler}>
+        //   Delete Server
+        // </button>
+
+//       </div>
+//         <button onClick={deleteChannelHandler}>
+//           Delete Channel
+//         </button>
+//     </div>
+//   );
+// };
+
+export default ChannelList

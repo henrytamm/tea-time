@@ -26,8 +26,8 @@ const EditServerModal = () => {
   };
 
   return (
-    <div className="create-server-modal">
-      <div className="create-server-modal-body">
+    <div className="edit-server-modal">
+      <div className="edit-server-modal-body">
         <header>Edit Server</header>
         <form onSubmit={handleSubmit}>
           <div className="modal-input-container">

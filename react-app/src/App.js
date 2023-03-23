@@ -6,7 +6,6 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage/Homepage"
-import ChannelMain from "./components/Full Compnent/Channels/ChannelMain";
 import ChannelList from "./components/Full Compnent/Channels/ChannelList";
 import MessageList from "./components/Full Compnent/Chatbox/MessageList";
 
