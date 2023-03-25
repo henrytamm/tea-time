@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Channel, Server, db
+from app.models import Channel, Server, db, Message
 from ..forms.channel_form import ChannelForm
 
 channel_routes = Blueprint('channels', __name__)
@@ -12,7 +12,12 @@ channel_routes = Blueprint('channels', __name__)
 #     channels = Channel.query.filter(Channel.server_id == serverId).all()
 #     return {'channels': [channel.to_dict() for channel in channels]}
 
-@channel_routes.route("/<int:serverId>/channels")
+# @channel_routes.route("/<int:serverId>/channels")
+# def get_all_channels(serverId):
+#   channels = Channel.query.filter(Channel.server_id == serverId)
+#   return {'channels': [channel.to_dict() for channel in channels]}
+
+@channel_routes.route("/<int:serverId>/channels", methods=["GET"])
 def get_all_channels(serverId):
   channels = Channel.query.filter(Channel.server_id == serverId)
   return {'channels': [channel.to_dict() for channel in channels]}
@@ -48,3 +53,10 @@ def delete_channel(serverId, channelId):
     db.session.delete(channel)
     db.session.commit()
     return "Channel deleted!"
+
+
+@channel_routes.route('/<int:channelId>/messages', methods=['GET'])
+# @login_required
+def get_channel_messages(channelId):
+  messages = Message.query.filter(Message.channel_id==channelId)
+  return {'messages': [message.to_dict() for message in messages]}

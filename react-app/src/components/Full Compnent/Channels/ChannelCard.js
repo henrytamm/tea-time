@@ -19,8 +19,6 @@ const ChannelCard = ({ channel, serverId }) => {
   const server = useSelector((state) => state.serverReducer);
 
   const isOwner = user.id === server.ownerId;
-  console.log("serverId", server);
-  console.log("channel.id", channel.id);
 
   const deleteChannelHandler = () => {
     const deleteConfirm = window.confirm(
@@ -70,10 +68,10 @@ const ChannelCard = ({ channel, serverId }) => {
         </div>
       </NavLink>
       {isOwner && (
-        <div className="edit-channel-btn">
+        <div className="create-channel-btn">
           <OpenModalButton
-            buttonText="Edit Channel"
-            modalComponent={<EditChannelModal channel={channel} />}
+            buttonText="Create Channel"
+            modalComponent={<CreateChannelModal />}
           />
       <button onClick={deleteServerHandler}>Delete Server</button>
         </div>
