@@ -24,7 +24,7 @@ class Message(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.user_id,
+            'userId': self.user.to_dict(),
             'channelId': self.channel_id,
             # 'serverId': self.server_id,
             'message': self.message,

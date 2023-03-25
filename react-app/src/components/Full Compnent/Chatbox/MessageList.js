@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getMessages, clearAllMessages } from "../../../store/messages";
 import MessageInput from "./MessageInput"
-// import MessageCard from "./MessageCard";
+import MessageCard from "./MessageCard";
 import { io } from "socket.io-client";
 
 let socket;
@@ -69,8 +69,9 @@ const MessageList = () => {
           <ul className="all-messages-container">
             {socketMessages.map((message) => {
               return <li>
-                {message.message}
-                {/* <MessageCard message={message}/> */}
+                {/* {message.userId.username}
+                {message.message} */}
+                <MessageCard message={message}/>
                 </li>;
             })}
           </ul>

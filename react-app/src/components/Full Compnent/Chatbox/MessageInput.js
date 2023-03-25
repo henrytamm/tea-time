@@ -8,10 +8,14 @@ const MessageInput = ({ socket, newRoom }) => {
   const dispatch = useDispatch();
   const [messageBody, setMessageBody] = useState("");
   const { channelId } = useParams();
+  const user = useSelector((state) => state.session.user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newMessage = { message: messageBody };
+    const newMessage = { 
+      message: messageBody, 
+      userId: user 
+    };
 
     let sentMessage = dispatch(createNewMessage(newMessage, channelId))
     .then((newMessage) =>
