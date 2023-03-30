@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Channel, Server, db, Message
 from ..forms.channel_form import ChannelForm
 
@@ -50,9 +50,15 @@ def delete_channel(serverId, channelId):
     Delete channel
     """
     channel = Channel.query.get(channelId)
-    db.session.delete(channel)
-    db.session.commit()
-    return "Channel deleted!"
+    server = Server.query.get(serverId)
+    if (current_user.id != server.owner_id):
+        return {
+            "message": "Cannot delete a channel in a server you don't own"
+        }
+    else:
+        db.session.delete(channel)
+        db.session.commit()
+        return "Channel deleted!"
 
 
 @channel_routes.route('/<int:channelId>/messages', methods=['GET'])

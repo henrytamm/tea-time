@@ -51,7 +51,7 @@ const ChannelList = () => {
       <div className="all-channels-list">
         {channels.map((channel) => {
           return (
-            <ChannelCard key={channel.id} channel={channel} serverId={serverId} />
+            <ChannelCard channel={channel} serverId={serverId} />
           )
         })}
       </div>
@@ -61,26 +61,26 @@ const ChannelList = () => {
 
 
   
-//   return (
-//     <div className="channels-container">
-//       <header className="channels-header">TEXT CHANNELS</header>
-//       <div className="all-channels">
-//         {channels.map((channel, i) => {
-//           return (
-//             <div className="channel-link-container" key={i}>
-//               <NavLink
-//                 className="channel-link"
-//                 to={`/${serverId}/${channel.id}`}
-//               >
-//                 <div className="channel-name">{channel.name}</div>
-//               </NavLink>
-//               {isOwner && <div className="edit-channel-btn">
-//                  <OpenModalButton
-//                  buttonText={"Edit Channel"}
-//                  modalComponent={<EditChannelModal channel={channel}/>}
-//                  />
-//                  </div>}
-//             </div>
+  // return (
+  //   <div className="channels-container">
+  //     <header className="channels-header">TEXT CHANNELS</header>
+  //     <div className="all-channels">
+  //       {channels.map((channel, i) => {
+  //         return (
+  //           <div className="channel-link-container" key={i}>
+  //             <NavLink
+  //               className="channel-link"
+  //               to={`/${serverId}/${channel.id}`}
+  //             >
+  //               <div className="channel-name">{channel.name}</div>
+  //             </NavLink>
+  //             {isOwner && <div className="edit-channel-btn">
+  //                <OpenModalButton
+  //                buttonText={"Edit Channel"}
+  //                modalComponent={<EditChannelModal channel={channel}/>}
+  //                />
+  //                </div>}
+  //           </div>
 //           );
 //         })}
 //         <div>

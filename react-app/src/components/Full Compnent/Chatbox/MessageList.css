@@ -1,0 +1,13 @@
+.channel-messages-container{
+    background-color: #36393e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.all-messages-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px 5px 5px 5px
+}

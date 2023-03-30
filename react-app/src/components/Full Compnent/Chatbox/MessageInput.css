@@ -1,0 +1,18 @@
+.message-body-container{
+    border-radius: 8px;
+    height: 40px;
+    width: 100%;
+    padding: 12px;
+    color: white;
+    background-color: #424549;
+}
+
+.create-message-form{
+    display: flex;
+    width: auto;
+    margin: 20px;
+}
+
+.create-message-btn{
+    display: none;
+}

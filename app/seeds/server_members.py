@@ -5,7 +5,7 @@ from sqlalchemy.sql import text
 def seed_server_members():
     demo1 = ServerMember(
         user_id=1,
-        server_id=2,
+        server_id=1,
     )
     demo2 = ServerMember(
         user_id=1,

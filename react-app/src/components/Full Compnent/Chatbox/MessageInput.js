@@ -3,6 +3,7 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getMessages, clearAllMessages, createNewMessage } from "../../../store/messages";
+import "./MessageInput.css"
 
 const MessageInput = ({ socket, newRoom }) => {
   const dispatch = useDispatch();

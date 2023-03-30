@@ -6,6 +6,7 @@ import { getMessages, clearAllMessages } from "../../../store/messages";
 import MessageInput from "./MessageInput"
 import MessageCard from "./MessageCard";
 import { io } from "socket.io-client";
+import "./MessageList.css"
 
 let socket;
 
@@ -19,8 +20,7 @@ const MessageList = () => {
   
   useEffect(() => {
     dispatch(getMessages(channelId))
-    .then((messages) =>
-    setSocketMessages(messages)
+    .then((messages) => setSocketMessages(messages)
     );
 
     socket = io();
@@ -47,7 +47,7 @@ const MessageList = () => {
     };
     // console.log('this is joinroom', joinRoom)
     // console.log('this is leave room', leaveRoom)
-    // console.log('checking if loaded is true', isLoaded)
+    // console.log('should be true', isLoaded)
 
     if (isLoaded) {
       leaveRoom(oldRoom);
@@ -68,11 +68,9 @@ const MessageList = () => {
         <div className="channel-messages-container">
           <ul className="all-messages-container">
             {socketMessages.map((message) => {
-              return <li>
-                {/* {message.userId.username}
-                {message.message} */}
+              return (
                 <MessageCard message={message}/>
-                </li>;
+                )
             })}
           </ul>
           <section className="message-input-container">

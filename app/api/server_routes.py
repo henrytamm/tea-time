@@ -63,6 +63,7 @@ def create_server():
 
     return jsonify(server.to_dict())
 
+
 @server_routes.route("/<int:serverId>", methods=['PUT'])
 def edit_server(serverId):
     """
@@ -70,10 +71,16 @@ def edit_server(serverId):
     """
     server = Server.query.get(serverId)
     form = ServerForm()
-    server.name = form.data['name']
-    server.server_img = form.data['server_img']
-    db.session.commit()
-    return jsonify(server.to_dict())
+    if (current_user.id != server.owner_id):
+        return {
+            "message": "Cannot edit a server you don't own"
+        }
+    else:
+        server.name = form.data['name']
+        server.server_img = form.data['server_img']
+        db.session.commit()
+        return jsonify(server.to_dict())
+
 
 @server_routes.route("/<int:serverId>", methods=["DELETE"])
 def delete_server(serverId):
@@ -81,24 +88,34 @@ def delete_server(serverId):
     Delete server
     """
     server = Server.query.get(serverId)
-    db.session.delete(server)
-    db.session.commit()
-    return "Server deleted!"
+    if (current_user.id != server.owner_id):
+        return {
+            "message": "Cannot delete a server you don't own"
+        }
+    else:
+        db.session.delete(server)
+        db.session.commit()
+        return "Server deleted!"
 
-@server_routes.route("/<int:serverId>/channels/new", methods=[ "POST" ])
+
+@server_routes.route("/<int:serverId>/channels/new", methods=["POST"])
 def create_channel(serverId):
-  """
-  Create a new channel in a server
-  """
-  form = ChannelForm()
-#   server = Server.query.get(serverId)
+    """
+    Create a new channel in a server
+    """
+    form = ChannelForm()
+    server = Server.query.get(serverId)
+    if (current_user.id != server.owner_id):
+        return {
+            "message": "Cannot create a channel in a server you don't own"
+        }
+    else:
+        new_channel = Channel(
+            server_id=serverId,
+            name=form.data["name"]
+        )
 
-  new_channel = Channel (
-    server_id = serverId,
-    name=form.data["name"]
-  )
+        db.session.add(new_channel)
+        db.session.commit()
 
-  db.session.add(new_channel)
-  db.session.commit()
-
-  return jsonify(new_channel.to_dict())
+        return jsonify(new_channel.to_dict())

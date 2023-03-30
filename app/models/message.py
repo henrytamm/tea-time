@@ -29,4 +29,5 @@ class Message(db.Model):
             # 'serverId': self.server_id,
             'message': self.message,
             'img': self.img,
+            'createdAt': self.created_at
         }
