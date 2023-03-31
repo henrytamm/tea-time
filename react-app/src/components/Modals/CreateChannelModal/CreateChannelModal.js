@@ -6,11 +6,11 @@ import { createChannel } from "../../../store/channels";
 import { useSelector } from "react-redux";
 
 const CreateChannelModal = () => {
-  //rendered in full component channels most likely*
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const { serverId } = useParams();
+  const [showModal, setShowModal] = useState(false)
   const server = useSelector((state) => state.serverReducer)
 
 

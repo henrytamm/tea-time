@@ -68,13 +68,13 @@ const ChannelCard = ({ channel, serverId }) => {
         </div>
       </NavLink>
       {isOwner && (
-        <div className="create-channel-btn">
-          <OpenModalButton
-            buttonText="Create Channel"
-            modalComponent={<CreateChannelModal />}
-          />
+        // <div className="create-channel-btn">
+        //   <OpenModalButton
+        //     buttonText="Create Channel"
+        //     modalComponent={<CreateChannelModal />}
+        //   />
       <button onClick={deleteServerHandler}>Delete Server</button>
-        </div>
+        // </div>
       )}
     </div>
   );

@@ -4,14 +4,15 @@ import { editServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
 import { useParams } from "react-router-dom";
 
-const EditServerModal = () => {
+const EditServerModal = ({ serverId }) => {
   //rendered in NavServerBar most likely*
   const [name, setName] = useState("");
   const [serverImg, setServerImg] = useState("");
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const { serverId } = useParams();
   const server = useSelector((state) => state.serverReducer);
+  // console.log(server)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +21,8 @@ const EditServerModal = () => {
       server_img: serverImg,
     };
 
-    await dispatch(editServer(server.id, payload));
-    // console.log(server.id)
+    await dispatch(editServer(serverId, payload));
+    window.location.reload();
     closeModal();
   };
 
@@ -31,7 +32,7 @@ const EditServerModal = () => {
         <header>Edit Server</header>
         <form onSubmit={handleSubmit}>
           <div className="modal-input-container">
-            <label>Server Name</label>
+            <label>Server Name </label>
             <input
               type="text"
               name="name"
@@ -41,7 +42,7 @@ const EditServerModal = () => {
             />
           </div>
           <div className="modal-input-container">
-            <label>Server Image</label>
+            <label>Server Image </label>
             <input
               type="text"
               name="image"

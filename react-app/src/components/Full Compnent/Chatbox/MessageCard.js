@@ -7,6 +7,7 @@ import defaultDiscord from "../../../images/defaultDiscord.png";
 import "./MessageCard.css"
 
 const MessageCard = ({ message }) => {
+   // to hide seconds
   const formatDate = (date, time) => {
     const options = time ? { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC' } : { year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = new Date(date).toLocaleString('en-us', options);
@@ -14,7 +15,6 @@ const MessageCard = ({ message }) => {
   };
   
   const date = formatDate(message.createdAt, true)
-  // console.log(date)
 
   return (
     <div>
