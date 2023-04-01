@@ -1,0 +1,8 @@
+.button-for-openmodalbutton{
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: rgb(50, 157, 50);
+}

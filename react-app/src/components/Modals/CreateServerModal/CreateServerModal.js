@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
+import UploadImage from "./UploadImage";
+import "./CreateServerModal.css"
 
 const CreateServerModal = () => {
-    //rendered in NavServerBar*
-    const [name, setName] = useState("");
-    const [serverImg, setServerImg] = useState("");
-    const dispatch = useDispatch();
-    const { closeModal } = useModal()
-  
+  //rendered in NavServerBar*
+  const [name, setName] = useState("");
+  const [serverImg, setServerImg] = useState("");
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,16 +20,24 @@ const CreateServerModal = () => {
     };
 
     await dispatch(createServer(payload));
-    closeModal()
+    closeModal();
+  };
+
+  const handleCancel = () => {
+    closeModal();
   };
 
   return (
     <div className="create-server-modal">
       <div className="create-server-modal-body">
-        <header>Create a Server</header>
+        <header className="server-header">Customize your server</header>
+        <h3 className="server-description">Give your new server a personality with a name and an icon. You an always change it later.</h3>
+        <div className="uploaded-image">
+          <UploadImage setServerImg={setServerImg} />
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="modal-input-container">
-            <label>Server Name</label>
+            <label className="modal-server-name-text">Server Name</label>
             <input
               type="text"
               name="name"
@@ -37,17 +46,9 @@ const CreateServerModal = () => {
               required
             />
           </div>
-          <div className="modal-input-container">
-            <label>Server Image</label>
-            <input
-              type="text"
-              name="image"
-              value={serverImg}
-              onChange={(e) => setServerImg(e.target.value)}
-            />
-          </div>
           <div className="modal-button-container">
-            <button type="submit">Create</button>
+          <button className="back-button" onClick={handleCancel}>Cancel</button>
+          <button className="submit-button" type="submit">Create</button>
           </div>
         </form>
       </div>
