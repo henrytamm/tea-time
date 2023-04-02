@@ -1,0 +1,24 @@
+.create-channel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #36393f;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .create-channel-btn:focus,
+  .create-channel-btn:active {
+    outline: none;
+  }
+  
+  .create-channel-btn i {
+    pointer-events: none;
+  }
+  

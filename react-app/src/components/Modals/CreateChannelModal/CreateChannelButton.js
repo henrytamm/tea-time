@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CreateChannelModal from "./CreateChannelModal";
+import "./CreateChannelButton.css"
 
 const CreateChannelButton = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +15,7 @@ const CreateChannelButton = () => {
 
   return (
     <>
-      <button onClick={handleButtonClick}>Create a Channel</button>
+      <button onClick={handleButtonClick} className="create-channel-btn"><i class="fa-solid fa-plus"></i></button>
       {showModal && <CreateChannelModal closeModal={handleCloseModal} />}
     </>
   );

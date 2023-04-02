@@ -4,27 +4,28 @@ import { useParams } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { createChannel } from "../../../store/channels";
 import { useSelector } from "react-redux";
+import "./CreateChannelModal.css";
 
-const CreateChannelModal = () => {
+const CreateChannelModal = ({ closeModal }) => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
   const { serverId } = useParams();
-  const [showModal, setShowModal] = useState(false)
-  const server = useSelector((state) => state.serverReducer.server)
-
+  const server = useSelector((state) => state.serverReducer.server);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
-        server_id: server.id,
-        name: name,
+      server_id: server.id,
+      name: name,
     };
 
     await dispatch(createChannel(server.id, payload));
     closeModal();
   };
 
+  const handleCancel = () => {
+    closeModal();
+  };
 
   return (
     <div className="create-channel-modal">
@@ -34,6 +35,7 @@ const CreateChannelModal = () => {
           <div className="modal-input-container">
             <label>Channel Name</label>
             <input
+              className="create-channel-input"
               type="text"
               name="name"
               value={name}
@@ -42,7 +44,12 @@ const CreateChannelModal = () => {
             />
           </div>
           <div className="modal-button-container">
-            <button type="submit">Create</button>
+            <button type="button" className="cancel-button" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button type="submit" className="create-button">
+              Create
+            </button>
           </div>
         </form>
       </div>
@@ -51,4 +58,3 @@ const CreateChannelModal = () => {
 };
 
 export default CreateChannelModal;
-

@@ -34,8 +34,6 @@ function App() {
           </Route>
           <Route exact path="/:serverId/:channelId?">
             <ServerTab />
-            {/* <ChannelList /> */}
-            {/* <MessageList /> */}
           </Route>
           <Route path="/">
             <Homepage />

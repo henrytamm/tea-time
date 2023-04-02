@@ -6,12 +6,10 @@ import { getUserServers, getOneServer } from "../../../store/servers";
 import { deleteChannel, getChannels } from "../../../store/channels";
 import { useState } from "react";
 import { deleteServer } from "../../../store/servers";
-import OpenModalButton from "../../OpenModalButton";
-import CreateChannelModal from "../../Modals/CreateChannelModal/CreateChannelModal";
-import EditServerModal from "../../Modals/EditServerModal/EditServerModal";
-import EditChannelModal from "../../Modals/EditChannelModal/EditChannelModal";
 import ChannelCard from "./ChannelCard";
-import "./ChannelList.css"
+import "./ChannelList.css";
+import EditServerModal from "../../Modals/EditServerModal/EditServerModal";
+import CreateChannelButton from "../../Modals/CreateChannelModal/CreateChannelButton";
 
 const ChannelList = () => {
   const dispatch = useDispatch();
@@ -20,30 +18,33 @@ const ChannelList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.serverReducer);
-  const serverOwner = useSelector((state) => state.serverReducer.server)
+  const serverOwner = useSelector((state) => state.serverReducer.server);
   const channels = Object.values(useSelector((state) => state.channelReducer));
   const isOwner = user.id === serverOwner?.ownerId;
 
-
-  // useEffect(() => {
-  //   dispatch(getUserServers(serverId)).then(() => {
-  //     dispatch(getChannels(serverId)).then(() => {
-  //       setIsLoaded(true);
-  //     });
-  //   });
-  // }, [dispatch, serverId, channelId]);
+  const [showEditServerModal, setShowEditServerModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     dispatch(getUserServers(serverId)).then(() => {
       dispatch(getOneServer(serverId)).then(() => {
         dispatch(getChannels(serverId)).then(() => {
-        })
           setIsLoaded(true);
+        });
       });
     });
   }, [dispatch, serverId, channelId]);
 
-  const deleteServerHandler = () => {
+
+  const handleDropdownClick = () => {
+    setShowMenu(prevState => !prevState);
+  };
+
+  const handleEditServerClick = () => {
+    setShowEditServerModal(true);
+  };
+
+  const handleDeleteServerClick = () => {
     const deleteConfirm = window.confirm(
       `Are you sure you want to delete this server?`
     );
@@ -53,29 +54,40 @@ const ChannelList = () => {
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleDropdownClick = () => {
-    setShowModal(true);
-  };
-
   return (
     <div className="channel-list-container">
-      <header className="channel-list-header">
-        TEXT CHANNELS
+      <div className="channel-list-server-name">
+        {serverOwner?.name}
         {isOwner && (
           <div className="dropdown">
             <button className="dropdown-button" onClick={handleDropdownClick}>
-            <i class="fa-solid fa-plus"></i>
+              <i class="fa-solid fa-angle-down"></i>
             </button>
-            {showModal && (
-              <CreateChannelModal
-                closeModal={() => setShowModal(false)}
-                serverId={serverId}
-              />
+            {showMenu && (
+              <div className="dropdown-menu">
+                <div className="dropdown-item" onClick={handleEditServerClick}>
+                  Edit Server
+                  {showEditServerModal && (
+                    <EditServerModal
+                      serverId={serverId}
+                      closeModal={() => setShowEditServerModal(false)}
+                    />
+                  )}
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={handleDeleteServerClick}
+                >
+                  Delete Server
+                </div>
+              </div>
             )}
           </div>
         )}
+      </div>
+      <header className="channel-list-header">
+        TEXT CHANNELS
+        {isOwner && <CreateChannelButton />}
       </header>
       <div className="all-channels-list">
         {channels.map((channel) => {
@@ -85,52 +97,5 @@ const ChannelList = () => {
     </div>
   );
 };
-
-// return (
-//   <div className="channels-container">
-//     <header className="channels-header">TEXT CHANNELS</header>
-//     <div className="all-channels">
-//       {channels.map((channel, i) => {
-//         return (
-//           <div className="channel-link-container" key={i}>
-//             <NavLink
-//               className="channel-link"
-//               to={`/${serverId}/${channel.id}`}
-//             >
-//               <div className="channel-name">{channel.name}</div>
-//             </NavLink>
-//             {isOwner && <div className="edit-channel-btn">
-//                <OpenModalButton
-//                buttonText={"Edit Channel"}
-//                modalComponent={<EditChannelModal channel={channel}/>}
-//                />
-//                </div>}
-//           </div>
-//           );
-//         })}
-//         <div>
-//           <OpenModalButton
-//           buttonText={"Create Channel"}
-//           modalComponent={<CreateChannelModal />}
-//           />
-//         </div>
-
-//         <div>
-//           <OpenModalButton
-//           buttonText={"Edit Server"}
-//           modalComponent={<EditServerModal />}
-//           />
-//         </div>
-// <button onClick={deleteServerHandler}>
-//   Delete Server
-// </button>
-
-//       </div>
-//         <button onClick={deleteChannelHandler}>
-//           Delete Channel
-//         </button>
-//     </div>
-//   );
-// };
 
 export default ChannelList;

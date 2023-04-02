@@ -1,38 +1,49 @@
-.user-message{
-    list-style: none;
-}
-
-.full-message-container{
+.user-message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  .full-message-container {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 15px 30px;
-    gap: 30px;
-    color: #c8c8c8
-}
-
-.profile-img{
+  }
+  
+  .user-profile-img-container {
+    margin-right: 10px;
+  }
+  
+  .profile-img {
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-}
-
-.message-username{
-    font-size: 20px
-}
-
-.message-username-container{
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+    margin-left: -10px;
+  }
+  
+  .message-username-container {
     display: flex;
     flex-direction: column;
-    gap: 10px
-}
-
-.message-body{
-    font-size: 16px;
-}
-
-.message-created-at{
-    color: rgb(143, 142, 142);
+  }
+  
+  .message-username {
+    margin-top: 16px;
+    font-weight: 600;
+    font-size: 20px;
+    color:#a8aaac
+  }
+  
+  .message-created-at {
+    font-weight: 400;
     font-size: 10px;
-    margin-left: 8px
-}
+    margin-left: 8px;
+    color: #72767d;
+  }
+  
+  .message-body {
+    padding-top: 6px;
+    font-size: 18px;
+    color:#d4d4d4
+  }
+  

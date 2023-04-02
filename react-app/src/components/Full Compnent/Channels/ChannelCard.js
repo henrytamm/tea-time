@@ -17,7 +17,7 @@ const ChannelCard = ({ channel, serverId }) => {
   const user = useSelector((state) => state.session.user);
   const channels = Object.values(useSelector((state) => state.channelReducer));
   const server = useSelector((state) => state.serverReducer.servers);
-  const serverOwner = useSelector((state) => state.serverReducer.server)
+  const serverOwner = useSelector((state) => state.serverReducer.server);
 
   const isOwner = user.id === serverOwner.ownerId;
 
@@ -63,20 +63,11 @@ const ChannelCard = ({ channel, serverId }) => {
               className="delete-channel-btn"
               onClick={deleteChannelHandler}
             >
-              <i class="fa-solid fa-trash-can" style={{color: "red"}}></i>
+              <i class="fa-solid fa-trash-can" style={{ color: "red" }}></i>
             </button>
           )}
         </div>
       </NavLink>
-      {isOwner && (
-        // <div className="create-channel-btn">
-        //   <OpenModalButton
-        //     buttonText="Create Channel"
-        //     modalComponent={<CreateChannelModal />}
-        //   />
-      <button onClick={deleteServerHandler}>Delete Server</button>
-        // </div>
-      )}
     </div>
   );
 };
