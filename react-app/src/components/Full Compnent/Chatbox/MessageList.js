@@ -3,10 +3,10 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getMessages, clearAllMessages } from "../../../store/messages";
-import MessageInput from "./MessageInput"
+import MessageInput from "./MessageInput";
 import MessageCard from "./MessageCard";
 import { io } from "socket.io-client";
-import "./MessageList.css"
+import "./MessageList.css";
 
 let socket;
 
@@ -17,14 +17,13 @@ const MessageList = () => {
   const [newRoom, setNewRoom] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [socketMessages, setSocketMessages] = useState([]);
-  
+
   useEffect(() => {
-    dispatch(getMessages(channelId))
-    .then((messages) => setSocketMessages(messages)
+    dispatch(getMessages(channelId)).then((messages) =>
+      setSocketMessages(messages)
     );
 
     socket = io();
-
 
     socket.on("message", (message) => {
       setSocketMessages((messages) => [...messages, message.newMessage]);
@@ -41,7 +40,7 @@ const MessageList = () => {
     const joinRoom = (room) => {
       socket.emit("join_room", { room: newRoom });
     };
-    
+
     const leaveRoom = (room) => {
       socket.emit("leave_room", { room: oldRoom });
     };
@@ -60,18 +59,17 @@ const MessageList = () => {
     return () => setIsLoaded(false);
   }, [oldRoom, newRoom, isLoaded]);
 
-  console.log(socketMessages)
+  console.log(socketMessages);
 
   return (
     <>
       {channelId && (
         <div className="channel-messages-container">
           <ul className="all-messages-container">
-            {socketMessages.map((message) => {
-              return (
-                <MessageCard message={message}/>
-                )
-            })}
+            {Array.isArray(socketMessages) &&
+              socketMessages.map((message) => (
+                <MessageCard key={message.id} message={message} />
+              ))}
           </ul>
           <section className="message-input-container">
             <MessageInput socket={socket} newRoom={newRoom} />

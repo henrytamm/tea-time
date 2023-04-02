@@ -11,6 +11,7 @@ import CreateChannelModal from "../../Modals/CreateChannelModal/CreateChannelMod
 import EditServerModal from "../../Modals/EditServerModal/EditServerModal";
 import EditChannelModal from "../../Modals/EditChannelModal/EditChannelModal";
 import ChannelCard from "./ChannelCard";
+import "./ChannelList.css"
 
 const ChannelList = () => {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ const ChannelList = () => {
         {isOwner && (
           <div className="dropdown">
             <button className="dropdown-button" onClick={handleDropdownClick}>
-              Add Channel
+            <i class="fa-solid fa-plus"></i>
             </button>
             {showModal && (
               <CreateChannelModal

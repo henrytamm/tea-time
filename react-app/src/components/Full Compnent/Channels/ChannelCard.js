@@ -16,9 +16,10 @@ const ChannelCard = ({ channel, serverId }) => {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const channels = Object.values(useSelector((state) => state.channelReducer));
-  const server = useSelector((state) => state.serverReducer);
+  const server = useSelector((state) => state.serverReducer.servers);
+  const serverOwner = useSelector((state) => state.serverReducer.server)
 
-  const isOwner = user.id === server.ownerId;
+  const isOwner = user.id === serverOwner.ownerId;
 
   const deleteChannelHandler = () => {
     const deleteConfirm = window.confirm(
@@ -52,7 +53,7 @@ const ChannelCard = ({ channel, serverId }) => {
           {isOwner && (
             <div className="edit-channel-btn">
               <OpenModalButton
-                buttonText="Edit Channel"
+                buttonText={<i class="fa-solid fa-pencil"></i>}
                 modalComponent={<EditChannelModal channel={channel} />}
               />
             </div>
@@ -62,7 +63,7 @@ const ChannelCard = ({ channel, serverId }) => {
               className="delete-channel-btn"
               onClick={deleteChannelHandler}
             >
-              Delete Channel
+              <i class="fa-solid fa-trash-can" style={{color: "red"}}></i>
             </button>
           )}
         </div>
