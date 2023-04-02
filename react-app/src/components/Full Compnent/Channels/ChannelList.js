@@ -19,13 +19,25 @@ const ChannelList = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.serverReducer);
+  const serverOwner = useSelector((state) => state.serverReducer.server)
   const channels = Object.values(useSelector((state) => state.channelReducer));
-  const isOwner = user.id === server.ownerId;
+  const isOwner = user.id === serverOwner?.ownerId;
+
+
+  // useEffect(() => {
+  //   dispatch(getUserServers(serverId)).then(() => {
+  //     dispatch(getChannels(serverId)).then(() => {
+  //       setIsLoaded(true);
+  //     });
+  //   });
+  // }, [dispatch, serverId, channelId]);
 
   useEffect(() => {
     dispatch(getUserServers(serverId)).then(() => {
-      dispatch(getChannels(serverId)).then(() => {
-        setIsLoaded(true);
+      dispatch(getOneServer(serverId)).then(() => {
+        dispatch(getChannels(serverId)).then(() => {
+        })
+          setIsLoaded(true);
       });
     });
   }, [dispatch, serverId, channelId]);

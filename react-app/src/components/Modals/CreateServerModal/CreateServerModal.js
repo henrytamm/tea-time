@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createServer } from "../../../store/servers";
+import { useDispatch, useSelector } from "react-redux";
+import { createServer, getUserServers } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
 import UploadImage from "./UploadImage";
 import "./CreateServerModal.css"
@@ -11,6 +11,7 @@ const CreateServerModal = () => {
   const [serverImg, setServerImg] = useState("");
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const user = useSelector((state) => state.session.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,9 +22,9 @@ const CreateServerModal = () => {
 
     await dispatch(createServer(payload));
     closeModal();
+    dispatch(getUserServers(user.id))
   };
 
-  console.log(handleSubmit)
 
   const handleCancel = () => {
     closeModal();

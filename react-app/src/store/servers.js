@@ -101,46 +101,91 @@ export const deleteServer = (serverId) => async (dispatch) => {
     }
 }
 
-const initialState = {};
+// const initialState = {};
 
-export const serverReducer = (state = initialState, action) => {
+// export const serverReducer = (state = initialState, action) => {
+//     let newState = { ...state }
+//     switch (action.type) {
+//         case GET_SERVERS: {
+//             action.servers.forEach((el) => {
+//                 newState[el.id] = el
+//             });
+//             return newState;
+//         }
+
+//         case GET_ONE_SERVER: {
+//             return {...action.server}
+//         }
+
+//         case GET_USER_SERVERS: {
+//             return {...newState, ...action.servers}
+//         }
+
+//         case CREATE_SERVER: {
+//             newState[action.server.id] = action.server;
+//             return newState
+//         }
+
+//         case DELETE_SERVER: {
+//             delete newState[action.server]
+//             return newState;
+//         }
+
+//         case EDIT_SERVER: {
+//             newState[action.server.id] = action.server;
+//             return newState
+//         }
+
+//         default: {
+//             return state;
+//         }
+//     }
+// }
+
+const initialState = {
+    servers: {},
+    server: null
+  };
+  
+  export const serverReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_SERVERS: {
-            const newState = { ...state };
-            action.servers.forEach((el) => {
-                newState[el.id] = el;
-            });
-            return newState;
-        }
-
-        case GET_ONE_SERVER: {
-            return {...action.server};
-        }
-
-        case GET_USER_SERVERS: {
-            return {...action.servers};
-        }
-
-        case CREATE_SERVER: {
-            const newState = { ...state };
-            newState[action.server.id] = action.server;
-            return newState;
-        }
-
-        case DELETE_SERVER: {
-            const newState = { ...state };
-            delete newState[action.server.id];
-            return newState;
-        }
-
-        case EDIT_SERVER: {
-            const newState = { ...state };
-            newState[action.server.id] = action.server;
-            return newState;
-        }
-
-        default: {
-            return state;
-        }
+      case GET_SERVERS: {
+        const newState = { ...state };
+        action.servers.forEach((el) => {
+          newState.servers[el.id] = el;
+        });
+        return newState;
+      }
+  
+      case GET_ONE_SERVER: {
+        return { ...state, server: action.server };
+      }
+  
+      case GET_USER_SERVERS: {
+        return { ...state, servers: action.servers };
+      }
+  
+      case CREATE_SERVER: {
+        const newState = { ...state };
+        newState.servers[action.server.id] = action.server;
+        return newState;
+      }
+  
+      case DELETE_SERVER: {
+        const newState = { ...state };
+        delete newState.servers[action.server.id];
+        return newState;
+      }
+  
+      case EDIT_SERVER: {
+        const newState = { ...state };
+        newState.servers[action.server.id] = action.server;
+        return newState;
+      }
+  
+      default: {
+        return state;
+      }
     }
-};
+  };
+  

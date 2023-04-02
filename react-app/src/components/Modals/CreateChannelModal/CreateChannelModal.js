@@ -11,7 +11,7 @@ const CreateChannelModal = () => {
   const { closeModal } = useModal();
   const { serverId } = useParams();
   const [showModal, setShowModal] = useState(false)
-  const server = useSelector((state) => state.serverReducer)
+  const server = useSelector((state) => state.serverReducer.server)
 
 
   const handleSubmit = async (e) => {
