@@ -6,7 +6,7 @@ import CreateServerModal from "../Modals/CreateServerModal/CreateServerModal";
 import OpenModalButton from "../OpenModalButton";
 import ContextMenu from "../Menu/ContextMenu";
 import ServerIcon from "./ServerIcon";
-import "./NavServerBar.css"
+import "./NavServerBar.css";
 
 function NavServerBar() {
   const dispatch = useDispatch();
@@ -41,27 +41,26 @@ function NavServerBar() {
       <div className="nav-bar-container">
         <ul className="server-list">
           {serverArr &&
-            serverArr.map((server) => {
-              return (
-                <li key={server.id}>
-                  <NavLink
-                    to={`/${server.id}`}
-                    onContextMenu={(e) => {
-                      handleServerClick(e, server.id);
-                      setCoordinates({ x: e.pageX, y: e.pageY });
-                    }}
-                  >
-                    <ServerIcon server={server} />
-                  </NavLink>
-                </li>
-              );
-            })}
+            serverArr.map((server) => (
+              <li key={server.id}>
+                <NavLink
+                  to={`/${server.id}`}
+                  onContextMenu={(e) => {
+                    handleServerClick(e, server.id);
+                    setCoordinates({ x: e.pageX, y: e.pageY });
+                  }}
+                >
+                  {server.name && <ServerIcon server={server} />}
+                </NavLink>
+              </li>
+            ))}
+
           <div className="open-modal-button">
             <OpenModalButton
               className="actual-button"
               buttonText={<i class="fa-solid fa-plus fa-2x"></i>}
               modalComponent={<CreateServerModal />}
-              />
+            />
           </div>
         </ul>
         {showContextMenu && clickedServerId !== null && (
@@ -74,7 +73,6 @@ function NavServerBar() {
             left={coordinates.x}
           />
         )}
-
       </div>
     </>
   );

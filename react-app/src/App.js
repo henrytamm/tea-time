@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Homepage from "./components/Homepage/Homepage"
 import ChannelList from "./components/Full Compnent/Channels/ChannelList";
 import MessageList from "./components/Full Compnent/Chatbox/MessageList";
+import NavServerBar from "./components/Navigation/NavServerBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/:serverId">
+            <NavServerBar />
             <ChannelList />
           </Route>
           <Route exact path="/:serverId/:channelId?">

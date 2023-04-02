@@ -23,7 +23,7 @@ const ChannelList = () => {
   const isOwner = user.id === server.ownerId;
 
   useEffect(() => {
-    dispatch(getOneServer(serverId)).then(() => {
+    dispatch(getUserServers(serverId)).then(() => {
       dispatch(getChannels(serverId)).then(() => {
         setIsLoaded(true);
       });

@@ -18,4 +18,6 @@ const ServerIcon = ({ server }) => {
   );
 };
 
+
 export default ServerIcon;
+

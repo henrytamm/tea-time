@@ -16,6 +16,10 @@ function Homepage() {
     //     dispatch(getUserServers(user.id))
     // }, [dispatch])
 
+    // useEffect(() => {
+    //     dispatch(getServers)
+    // }, [dispatch])
+
   
 
     return (
