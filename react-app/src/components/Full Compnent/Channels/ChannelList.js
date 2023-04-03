@@ -22,6 +22,7 @@ const ChannelList = () => {
   const channels = Object.values(useSelector((state) => state.channelReducer));
   const isOwner = user.id === serverOwner?.ownerId;
 
+  const [isServerDeleted, setIsServerDeleted] = useState(false);
   const [showEditServerModal, setShowEditServerModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -33,11 +34,10 @@ const ChannelList = () => {
         });
       });
     });
-  }, [dispatch, serverId, channelId]);
-
+  }, [dispatch, serverId, channelId, isServerDeleted]);
 
   const handleDropdownClick = () => {
-    setShowMenu(prevState => !prevState);
+    setShowMenu((prevState) => !prevState);
   };
 
   const handleEditServerClick = () => {
@@ -49,8 +49,10 @@ const ChannelList = () => {
       `Are you sure you want to delete this server?`
     );
     if (deleteConfirm) {
-      dispatch(deleteServer(serverId));
-      history.push(`/`);
+      dispatch(deleteServer(serverId)).then(() => {
+        setIsServerDeleted(true);
+        history.push(`/`);
+      });
     }
   };
 
@@ -67,12 +69,6 @@ const ChannelList = () => {
               <div className="dropdown-menu">
                 <div className="dropdown-item" onClick={handleEditServerClick}>
                   Edit Server
-                  {showEditServerModal && (
-                    <EditServerModal
-                      serverId={serverId}
-                      closeModal={() => setShowEditServerModal(false)}
-                    />
-                  )}
                 </div>
                 <div
                   className="dropdown-item"
@@ -94,6 +90,12 @@ const ChannelList = () => {
           return <ChannelCard channel={channel} serverId={serverId} />;
         })}
       </div>
+      {showEditServerModal && (
+        <EditServerModal
+          serverId={serverId}
+          closeModal={() => setShowEditServerModal(false)}
+        />
+      )}
     </div>
   );
 };

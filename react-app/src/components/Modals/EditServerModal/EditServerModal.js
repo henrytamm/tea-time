@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
-import { useParams } from "react-router-dom";
+import UploadImage from "../CreateServerModal/UploadImage";
+import "./EditServerModal.css";
 
-const EditServerModal = ({ serverId }) => {
-  //rendered in NavServerBar most likely*
+const EditServerModal = ({ serverId, closeModal }) => {
   const [name, setName] = useState("");
   const [serverImg, setServerImg] = useState("");
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
-  const server = useSelector((state) => state.serverReducer);
-  // console.log(server)
 
+  console.log('this is closemodal', closeModal)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,12 +24,21 @@ const EditServerModal = ({ serverId }) => {
     closeModal();
   };
 
+  const handleCancel = () => {
+    console.log("Cancel button clicked");
+    closeModal();
+  };
+  
+
   return (
     <div className="edit-server-modal">
       <div className="edit-server-modal-body">
-        <header>Edit Server</header>
+        <div className="edit-server-image">
+          <label className="edit-server-image-label">Server Image </label>
+          <UploadImage setServerImg={setServerImg} />
+        </div>
         <form onSubmit={handleSubmit}>
-          <div className="modal-input-container">
+          <div className="edit-server-name">
             <label>Server Name </label>
             <input
               type="text"
@@ -41,17 +48,9 @@ const EditServerModal = ({ serverId }) => {
               required
             />
           </div>
-          <div className="modal-input-container">
-            <label>Server Image </label>
-            <input
-              type="text"
-              name="image"
-              value={serverImg}
-              onChange={(e) => setServerImg(e.target.value)}
-            />
-          </div>
-          <div className="modal-button-container">
+          <div className="edit-server-save-btn">
             <button type="submit">Save</button>
+            <button type="button" onClick={handleCancel}>Cancel</button>
           </div>
         </form>
       </div>

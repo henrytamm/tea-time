@@ -1,95 +1,40 @@
-.channel-card-name{
-    list-style-type: none;
+.channel-card-main {
+  color: #d3d3d3;
+  padding: 12px 10px;
+  border-bottom: 1px solid #292b2f;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0;
-    padding: 4px;
-    background-color: #2f3136;
-    color: #fff;
-  }
-  
-  .channel-card-main {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    text-decoration: none;
-    color: #fff;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .channel-card-main:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .channel-names {
-    display: flex;
-    align-items: center;
-  }
-  
-  .channel-card-name {
-    margin-right: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: capitalize;
-  }
-  
-  .edit-channel-btn {
-    margin-right: 8px;
-  }
-  
-  .delete-channel-btn {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    margin-left: auto;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .delete-channel-btn:hover {
-    color: #f04747;
-  }
-  
-  .create-channel-btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 8px;
-  }
-  
-  .create-channel-btn button {
-    background-color: #43b581;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 8px 16px;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .create-channel-btn button:hover {
-    background-color: #3a9f4a;
-  }
-  
-  .delete-server-btn {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    margin-left: auto;
-    transition: color 0.2s ease-in-out;
-  }
-  
-  .delete-server-btn:hover {
-    color: #f04747;
-  }
-  
+
+.channel-card-main:hover {
+  background-color: #292b2f;
+}
+
+.channel-names {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.channel-card-name {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  max-height: 3em;
+  display: -webkit-box;
+}
+
+.delete-channel-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-channel-btn:hover {
+  color: red;
+}

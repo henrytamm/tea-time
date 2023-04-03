@@ -32,16 +32,6 @@ const ChannelCard = ({ channel, serverId }) => {
     }
   };
 
-  const deleteServerHandler = () => {
-    const deleteConfirm = window.confirm(
-      `Are you sure you want to delete this server?`
-    );
-    if (deleteConfirm) {
-      dispatch(deleteServer(serverId));
-      history.push(`/`);
-    }
-  };
-
   return (
     <div className="header">
       <NavLink className="channel-card-main" to={`/${serverId}/${channel.id}/`}>
@@ -53,7 +43,7 @@ const ChannelCard = ({ channel, serverId }) => {
           {isOwner && (
             <div className="edit-channel-btn">
               <OpenModalButton
-                buttonText={<i class="fa-solid fa-pencil"></i>}
+                buttonText={<i class="fa-solid fa-pencil" style={{color: "grey"}}></i>}
                 modalComponent={<EditChannelModal channel={channel} />}
               />
             </div>
@@ -63,7 +53,7 @@ const ChannelCard = ({ channel, serverId }) => {
               className="delete-channel-btn"
               onClick={deleteChannelHandler}
             >
-              <i class="fa-solid fa-trash-can" style={{ color: "red" }}></i>
+              <i class="fa-solid fa-trash-can" style={{ color: "grey" }}></i>
             </button>
           )}
         </div>
