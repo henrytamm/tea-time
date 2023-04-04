@@ -1,0 +1,39 @@
+.channel-list-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #2f3136;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .channel-list-header {
+    color: #dcddde;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dropdown-button {
+    background-color: #7289da;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 10px;
+  }
+  
+  .dropdown-button:hover {
+    background-color: #677bc4;
+  }
+  
+  .all-channels-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  

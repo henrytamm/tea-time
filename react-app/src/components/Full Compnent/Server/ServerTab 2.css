@@ -1,0 +1,26 @@
+.server-tab-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .nav-server-bar-main {
+    width: 120px;
+    height: 100vh;
+    background-color: #2f3136;
+    border-right: 1px solid #40444b;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .channel-list-main {
+    width: 15%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #2f3136;
+    border-radius: 0 8px 8px 0;
+    padding: 10px;
+  }
+  
