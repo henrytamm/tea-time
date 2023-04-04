@@ -120,3 +120,25 @@ def create_channel(serverId):
         db.session.commit()
 
         return jsonify(new_channel.to_dict())
+    
+@server_routes.route('/<int:serverId>/join', methods=['POST'])
+@login_required
+def join_server(serverId):
+    """
+    logged in user gets added to server member list
+    """
+    server = Server.query.get(serverId)
+    currServer = Server.query.join(ServerMember).filter(ServerMember.user_id == current_user.id).all()
+    member = ServerMember(
+        user_id=current_user.id,
+        server_id=serverId
+    )
+
+    if server in currServer:
+        return jsonify({'error': 'User is already a member'}), 400
+    
+    db.session.add(member)
+    db.session.commit()
+
+    return jsonify(server.to_dict())
+    

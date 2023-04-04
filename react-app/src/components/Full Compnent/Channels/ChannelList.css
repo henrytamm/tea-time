@@ -1,4 +1,4 @@
-/* .channel-list-container {
+.channel-list-container {
   display: flex;
   flex-direction: column;
   background-color: #2f3136;
@@ -77,87 +77,5 @@
 }
 
 .dropdown-menu{
-  background-color: #677bc4;
-} */
-
-.channel-list-container {
-  background-color: #36393f;
-  color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.channel-list-server-name {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.dropdown {
-  position: relative;
-  z-index: 1;
-}
-
-.dropdown-button {
-  border: none;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0 10px;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #36393f;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-.dropdown-item {
-  color: #ffffff;
-  font-size: 16px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background-color: #7289da;
-}
-
-.all-channels-list {
-  margin-top: 16px;
-  overflow-y: auto;
-  height: 100%;
-}
-
-.channel-list-header {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.create-channel-button {
-  background-color: #7289da;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.create-channel-button:hover {
   background-color: #677bc4;
 }

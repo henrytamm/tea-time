@@ -38,3 +38,7 @@
 .delete-channel-btn:hover {
   color: red;
 }
+
+.edit-channel-btn{
+  margin-left: 60px;
+}

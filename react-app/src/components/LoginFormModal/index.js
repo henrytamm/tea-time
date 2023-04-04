@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 import SignUpForm from "../SignupFormModal";
+import { Redirect } from "react-router-dom";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -11,7 +12,10 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+  const user = useSelector((state) => state.session.user)
+  const { setModalContent } = useModal();
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -21,19 +25,23 @@ function LoginFormModal() {
       closeModal();
     }
   };
-
+  
   const handleDemoLogin = (e) => {
     e.preventDefault();
     setEmail("demo@aa.io");
     setPassword("password");
   };
-
-  const { setModalContent } = useModal();
-
+  
+  
   const openSignupModal = () => {
     setModalContent(<SignUpForm />);
   };
+  
+  if (user) {
+    return <Redirect to="/1" />
+  }
 
+  
   return (
     <div className="login-form-container">
       <form onSubmit={handleSubmit} className="login-form">

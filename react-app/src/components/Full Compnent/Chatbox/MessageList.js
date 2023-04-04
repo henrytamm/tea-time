@@ -33,6 +33,7 @@ const MessageList = () => {
 
     return () => {
       socket.disconnect();
+      dispatch(clearAllMessages());
     };
   }, [dispatch, channelId]);
 

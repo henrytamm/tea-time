@@ -4,6 +4,7 @@ const GET_USER_SERVERS = "servers/GET_USER_SERVERS"
 const CREATE_SERVER = "servers/CREATE_SERVER"
 const EDIT_SERVER = "servers/EDIT_SERVER"
 const DELETE_SERVER = "servers/DELETE_SERVER"
+const JOIN_SERVER = "servers/JOIN_SERVER"
 
 
 const getServersAction = (servers) => ({
@@ -33,6 +34,11 @@ const editServerAction = (server) => ({
 
 const deleteServerAction = (server) => ({
     type: DELETE_SERVER,
+    server
+})
+
+const joinServerAction = (server) => ({
+    type: JOIN_SERVER,
     server
 })
 
@@ -69,9 +75,10 @@ export const createServer = (payload) => async (dispatch) => {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(payload)
     });
-
+    
     if (res.ok) {
         const server = await res.json();
+        // console.log('from store', server);
         dispatch(createServerAction(server))
     }
     return res
@@ -101,46 +108,16 @@ export const deleteServer = (serverId) => async (dispatch) => {
     }
 }
 
-// const initialState = {};
-
-// export const serverReducer = (state = initialState, action) => {
-//     let newState = { ...state }
-//     switch (action.type) {
-//         case GET_SERVERS: {
-//             action.servers.forEach((el) => {
-//                 newState[el.id] = el
-//             });
-//             return newState;
-//         }
-
-//         case GET_ONE_SERVER: {
-//             return {...action.server}
-//         }
-
-//         case GET_USER_SERVERS: {
-//             return {...newState, ...action.servers}
-//         }
-
-//         case CREATE_SERVER: {
-//             newState[action.server.id] = action.server;
-//             return newState
-//         }
-
-//         case DELETE_SERVER: {
-//             delete newState[action.server]
-//             return newState;
-//         }
-
-//         case EDIT_SERVER: {
-//             newState[action.server.id] = action.server;
-//             return newState
-//         }
-
-//         default: {
-//             return state;
-//         }
-//     }
-// }
+export const joinServer = (serverId) => async (dispatch) => {
+    const res = await fetch (`api/servers/${serverId}/join`, {
+        method: "POST"
+    })
+    if (res.ok) {
+        const server = await res.json();
+        dispatch(joinServerAction(server))
+        return server
+    }
+}
 
 const initialState = {
     servers: {},
@@ -181,6 +158,12 @@ const initialState = {
         const newState = { ...state };
         newState.servers[action.server.id] = action.server;
         return newState;
+      }
+
+      case JOIN_SERVER: {
+        const newState = { ...state };
+        newState.servers[action.server.id] = action.server;
+        return newState
       }
   
       default: {

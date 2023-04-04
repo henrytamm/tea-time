@@ -1,0 +1,52 @@
+.all-servers-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    background-color: #36393f;
+  }
+  
+  .all-servers-header {
+    width: 100%;
+    text-align: center;
+    color: rgb(173, 171, 171)
+  }
+  
+  .all-servers-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .all-servers-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 1.5rem 0;
+  }
+
+  .all-servers-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: rgb(173, 171, 171)
+  }
+  
+  .create-server-link {
+    margin-left: 0.5rem;
+    text-decoration: underline;
+    color: #7289da;
+    cursor: pointer;
+  }
+  
+  .create-server-link:hover {
+    color: #7c94e8;
+  }
+  
+  

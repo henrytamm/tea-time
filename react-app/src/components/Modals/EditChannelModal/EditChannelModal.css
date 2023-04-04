@@ -1,0 +1,73 @@
+.edit-channel-modal-container {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-channel-modal {
+    width: 450px;
+    background-color: #36393f;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+  
+  .edit-channel-modal-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .edit-channel-modal-input-container {
+    margin-bottom: 16px;
+  }
+  
+  .edit-channel-modal-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .edit-channel-modal-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    background-color: #202225;
+    color: #ffffff;
+  }
+  
+  .edit-channel-modal-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .edit-channel-modal-submit-button {
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .edit-channel-modal-cancel-button{
+    background-color: #7289da;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }

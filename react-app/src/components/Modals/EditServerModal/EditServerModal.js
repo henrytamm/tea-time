@@ -10,8 +10,6 @@ const EditServerModal = ({ serverId, closeModal }) => {
   const [serverImg, setServerImg] = useState("");
   const dispatch = useDispatch();
 
-  console.log('this is closemodal', closeModal)
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
@@ -25,7 +23,6 @@ const EditServerModal = ({ serverId, closeModal }) => {
   };
 
   const handleCancel = () => {
-    console.log("Cancel button clicked");
     closeModal();
   };
   

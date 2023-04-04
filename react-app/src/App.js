@@ -10,6 +10,7 @@ import ChannelList from "./components/Full Compnent/Channels/ChannelList";
 import MessageList from "./components/Full Compnent/Chatbox/MessageList";
 import NavServerBar from "./components/Navigation/NavServerBar";
 import ServerTab from "./components/Full Compnent/Server/ServerTab";
+import AllServers from "./components/AllServers/AllServers";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/servers">
+            <AllServers />
           </Route>
           <Route exact path="/:serverId">
             <ServerTab />

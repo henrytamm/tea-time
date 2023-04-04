@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserServers, getOneServer } from "../../store/servers";
 import CreateServerModal from "../Modals/CreateServerModal/CreateServerModal";
@@ -7,33 +7,32 @@ import OpenModalButton from "../OpenModalButton";
 import ContextMenu from "../Menu/ContextMenu";
 import ServerIcon from "./ServerIcon";
 import "./NavServerBar.css";
+import { logout } from "../../store/session";
+import AllServers from "../AllServers/AllServers";
 
 function NavServerBar() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const servers = useSelector((state) => state.serverReducer.servers);
   const serverArr = servers ? Object.values(servers) : null;
-
-  const [clickedServerId, setClickedServerId] = useState(null);
-  const [showContextMenu, setShowContextMenu] = useState(false);
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
-
-  const handleServerClick = (e, serverId) => {
-    e.preventDefault();
-    setClickedServerId(serverId);
-    setShowContextMenu(true);
-  };
-
-  const handleEditServer = (serverId) => {
-    setClickedServerId(serverId);
-    setShowContextMenu(true);
-  };
-
+  const channels = Object.values(useSelector((state) => state.channelReducer))
+  
   useEffect(() => {
     if (user) {
-      dispatch(getUserServers(user.id))
+      dispatch(getUserServers(user.id));
     }
   }, [dispatch, user]);
+  console.log(channels)
+
+  const handleLogout = () => {
+    history.push("/");
+    dispatch(logout());
+  };
+
+  const toServers = () => {
+    history.push("/servers")
+  }
 
   return (
     <>
@@ -42,13 +41,8 @@ function NavServerBar() {
           {serverArr &&
             serverArr.map((server) => (
               <li key={server.id}>
-                <NavLink
-                  to={`/${server.id}`}
-                  // onContextMenu={(e) => {
-                  //   handleServerClick(e, server.id);
-                  //   setCoordinates({ x: e.pageX, y: e.pageY });
-                  // }}
-                >
+                {/* <NavLink to={`/${server.id}`}> */}
+                <NavLink to={`/${server.id}`}>
                   {server.name && <ServerIcon server={server} />}
                 </NavLink>
               </li>
@@ -61,21 +55,18 @@ function NavServerBar() {
               modalComponent={<CreateServerModal />}
             />
           </div>
+
+          <div className="all-servers-button-nav" onClick={toServers}>
+          <i class="fa-regular fa-compass"></i>
+          </div>
+
         </ul>
-        {/* {showContextMenu && clickedServerId !== null && (
-          <ContextMenu
-            serverId={clickedServerId}
-            setShowContextMenu={setShowContextMenu}
-            handleEditServer={handleEditServer}
-            contextedServerId={clickedServerId}
-            top={coordinates.y}
-            left={coordinates.x}
-          />
-        )} */}
+        <div className="logout-button" onClick={handleLogout}>
+          <i class="fa-solid fa-right-from-bracket logout-icon"></i>
+        </div>
       </div>
     </>
   );
 }
 
 export default NavServerBar;
-

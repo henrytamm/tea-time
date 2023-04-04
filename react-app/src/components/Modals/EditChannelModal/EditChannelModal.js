@@ -5,39 +5,35 @@ import { useModal } from "../../../context/Modal";
 import { editChannel, getOneChannel } from "../../../store/channels";
 import { useSelector } from "react-redux";
 
-const EditChannelModal = ({channel}) => {
-  //rendered in full component channels most likely*
+import "./EditChannelModal.css";
+
+const EditChannelModal = ({ channel }) => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const { serverId, channelId } = useParams();
   const server = useSelector((state) => state.serverReducer);
+  const serverOwner = useSelector((state) => state.serverReducer.server)
   const channels = useSelector((state) => state.channelReducer);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
       name: name,
     };
-    dispatch(editChannel(server.id, channel.id, payload));
+    dispatch(editChannel(serverOwner.id, channel.id, payload));
     closeModal();
-    console.log('serverId', serverId)
-    console.log('server.id', server.id)
-    console.log('channelId', channelId)
-    console.log('channel.id', channel.id)
-    console.log('channel state', channel)
   };
 
-
   return (
-    <div className="edit-channel-modal">
-      <div className="edit-channel-modal-body">
-        <header>Edit Channel Details</header>
+    <div className="edit-channel-modal-container">
+      <div className="edit-channel-modal">
+        <header className="edit-channel-modal-header">Edit Channel Details</header>
         <form onSubmit={handleSubmit}>
-          <div className="modal-input-container">
-            <label>Channel Name</label>
+          <div className="edit-channel-modal-input-container">
+            <label className="edit-channel-modal-label">Channel Name</label>
             <input
+              className="edit-channel-modal-input"
               type="text"
               name="name"
               value={name}
@@ -45,8 +41,9 @@ const EditChannelModal = ({channel}) => {
               required
             />
           </div>
-          <div className="modal-button-container">
-            <button type="submit">Save</button>
+          <div className="edit-channel-modal-button-container">
+            <button className="edit-channel-modal-submit-button" type="submit">Save</button>
+            <button className="edit-channel-modal-cancel-button" type="button" onClick={closeModal}>Cancel</button>
           </div>
         </form>
       </div>

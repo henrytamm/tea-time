@@ -29,8 +29,7 @@ const MessageCard = ({ message }) => {
             <div className="user-profile-img-container">
               <img
                 className="profile-img"
-                src={message.userId.profileImg}
-                alt={defaultDiscord}
+                src={message.userId.profileImg || defaultDiscord}
               />
             </div>
             <div className="message-username-container">
@@ -38,7 +37,7 @@ const MessageCard = ({ message }) => {
                 {message.userId.username}
                 <span className="message-created-at"> {date}</span>
               </h1>
-            <div className="message-body">{message.message}</div>
+              <div className="message-body">{message.message}</div>
             </div>
           </div>
         </li>
