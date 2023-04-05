@@ -14,7 +14,7 @@ def seed_channels():
 
     channel3 = Channel(
         server_id = 1,
-        name="real talk"
+        name="spill the tea"
     )
 
     channel4 = Channel(

@@ -6,7 +6,7 @@ def seed_messages():
     message1 = Message(
         channel_id = 1,
         user_id = 1,
-        message="wassup girls",
+        message="bork bork",
         img="https://imgs.search.brave.com/b7MiiBoqJbjmNv6oTSfZhT2_CsL6MHR-myoARI36WEM/rs:fit:423:236:1/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvZW4vYS9hZi9H/b3NzaXBfR2lybF9B/Y2FwdWxjb190aXRs/ZV9jYXJkLmpwZw",
         created_at=datetime.utcnow()
     )
@@ -14,28 +14,28 @@ def seed_messages():
     message2 = Message(
         channel_id = 1,
         user_id = 2,
-        message="omg yasssssss",
+        message="arf bork",
         created_at=datetime.utcnow()
     )
 
     message3 = Message(
         channel_id = 1,
         user_id = 3,
-        message="shes serving rn fr",
+        message="woof",
         created_at=datetime.utcnow()
     )
 
     message4= Message(
         channel_id = 2,
         user_id = 1,
-        message="im just here for a GOOD TIME!",
+        message="woof woof",
         created_at=datetime.utcnow()
     )
 
     message5= Message(
         channel_id = 1,
         user_id = 1,
-        message="i got the tea",
+        message="bark",
         created_at=datetime.utcnow()
     )
 
