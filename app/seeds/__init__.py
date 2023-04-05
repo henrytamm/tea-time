@@ -27,11 +27,11 @@ def seed():
         undo_channels()
         undo_messages()
         undo_server_members()
-    seed_server_members()
     seed_users()
     seed_servers()
     seed_channels()
     seed_messages()
+    seed_server_members()
     # Add other seed functions here
 
 
