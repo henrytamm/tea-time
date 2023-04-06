@@ -36,11 +36,22 @@ def create_server():
     Create a new server with a general channel
     """
     form = ServerForm()
+    url = None
+    if "image" in request.files:
+            image = request.files['image']
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+
+            if "url" not in upload:
+                return upload, 400
+            url = upload["url"]
     
     server = Server(
         name=form.data["name"],
         owner_id=current_user.get_id(),
-        server_img=form.data["server_img"],
+        server_img=url,
     )
 
     db.session.add(server)
@@ -70,6 +81,7 @@ def edit_server(serverId):
     """
     Edit server
     """
+    
     server = Server.query.get(serverId)
     form = ServerForm()
     if (current_user.id != server.owner_id):
@@ -77,8 +89,19 @@ def edit_server(serverId):
             "message": "Cannot edit a server you don't own"
         }
     else:
+        url = None
+        if "image" in request.files:
+            image = request.files['image']
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+
+            if "url" not in upload:
+                return upload, 400
+            url = upload["url"]
         server.name = form.data['name']
-        server.server_img = form.data['server_img']
+        server.server_img = url
         db.session.commit()
         return jsonify(server.to_dict())
 

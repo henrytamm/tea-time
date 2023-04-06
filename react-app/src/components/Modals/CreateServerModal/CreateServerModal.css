@@ -1,85 +1,115 @@
 .create-server-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .create-server-modal-body {
-    background-color: #2f3136;
-    width: 400px;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .server-header {
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffffff;
-  }
-  
-  .server-description {
-    font-size: 14px;
-    margin-bottom: 30px;
-    color: #b9bbbe;
-    font-weight: 300;
-  }
-  
-  .modal-input-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
-  }
-  
-  .modal-server-name-text {
-    font-size: 14px;
-    color: #b9bbbe;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"] {
-    height: 32px;
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    background-color: #40444b;
-    color: #ffffff;
-  }
-  
-  .modal-button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .back-button {
-    background-color: #36393f;
-    border: none;
-    color: #ffffff;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .submit-button {
-    background-color: #7289da;
-    border: none;
-    color: #ffffff;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.create-server-modal-body {
+  background-color: #363636;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  padding: 24px;
+}
+
+.create-server-modal-header {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #d9d1d1;
+}
+
+.create-server-modal-description {
+  font-size: 14px;
+  color: #d9d1d1;
+  margin-bottom: 32px;
+}
+
+.create-server-modal-input-container {
+  margin-bottom: 24px;
+}
+
+.create-server-modal-server-name-text {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.create-server-modal-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-server-modal-image-label {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.create-server-modal-camera-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  color: #333;
+}
+
+.create-server-modal-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.create-server-modal-input {
+  display: none;
+}
+
+.create-server-modal-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-server-modal-back-button {
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.create-server-modal-back-button:hover {
+  background-color: #e5e5e5;
+}
+
+.create-server-modal-submit-button {
+  background-color: #7289da;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.create-server-modal-submit-button:hover {
+  background-color: #677bc4;
+}

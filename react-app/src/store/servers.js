@@ -69,11 +69,10 @@ export const getUserServers = (userId) => async (dispatch) => {
     }
 }
 
-export const createServer = (payload) => async (dispatch) => {
+export const createServer = (formData) => async (dispatch) => {
     const res = await fetch (`/api/servers/`, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(payload)
+        body: formData
     });
     
     if (res.ok) {
@@ -84,11 +83,10 @@ export const createServer = (payload) => async (dispatch) => {
     return res
 }
 
-export const editServer = (serverId, payload) => async (dispatch) => {
+export const editServer = (formData, serverId) => async (dispatch) => {
     const res = await fetch (`/api/servers/${serverId}`, {
         method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(payload)
+        body: formData
     });
 
     if (res.ok) {
