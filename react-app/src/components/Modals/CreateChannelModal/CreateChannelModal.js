@@ -28,14 +28,16 @@ const CreateChannelModal = ({ closeModal }) => {
   };
 
   return (
-    <div className="create-channel-modal">
-      <div className="create-channel-modal-body">
-        <header>Create a Channel</header>
+    <div className="create-channel-modal-container">
+      <div className="create-channel-modal">
+        <header className="create-channel-modal-header">
+          Create a Channel
+        </header>
         <form onSubmit={handleSubmit}>
-          <div className="modal-input-container">
-            <label>Channel Name</label>
+          <div className="create-channel-modal-input-container">
+            <label className="create-channel-modal-label">Channel Name</label>
             <input
-              className="create-channel-input"
+              className="create-channel-modal-input"
               type="text"
               name="name"
               value={name}
@@ -43,11 +45,18 @@ const CreateChannelModal = ({ closeModal }) => {
               required
             />
           </div>
-          <div className="modal-button-container">
-            <button type="button" className="cancel-button" onClick={handleCancel}>
+          <div className="create-channel-modal-button-container">
+            <button
+              type="button"
+              className="create-channel-modal-cancel-button"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
-            <button type="submit" className="create-button">
+            <button
+              type="submit"
+              className="create-channel-modal-submit-button"
+            >
               Create
             </button>
           </div>

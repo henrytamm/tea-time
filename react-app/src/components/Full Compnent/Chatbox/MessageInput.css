@@ -5,6 +5,7 @@
     padding: 12px;
     color: white;
     background-color: #424549;
+    border: 1px solid #2f3136;
 }
 
 .create-message-form{
@@ -16,3 +17,13 @@
 .create-message-btn{
     display: none;
 }
+
+.message-body-container {
+    border: none;
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    color: #dcddde;
+  }
+
+  

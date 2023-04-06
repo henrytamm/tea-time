@@ -10,6 +10,7 @@
 
 .channel-card-main:hover {
   background-color: #292b2f;
+  border-radius: 10px;
 }
 
 .channel-names {

@@ -1,212 +1,75 @@
-/* .create-channel-modal {
+.create-channel-modal-container {
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
-.create-channel-modal-body {
-  background-color: #ffffff;
+.create-channel-modal {
+  width: 450px;
+  background-color: #36393f;
+  border-radius: 8px;
   padding: 16px;
-  border-radius: 4px;
-  width: 300px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }
 
-.create-channel-modal-body header {
-  font-size: 1.2rem;
+.create-channel-modal-header {
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
-.modal-input-container {
-  margin-bottom: 16px;;
+.create-channel-modal-input-container {
+  margin-bottom: 16px;
 }
 
-.modal-input-container label {
-  font-size: 0.9rem;
+.create-channel-modal-label {
+  display: block;
+  font-size: 16px;
   margin-bottom: 8px;
-  color:rgb(117, 106, 106)
 }
 
-.modal-input-container input {
-  width: 95%;
-  padding: 8px;
-  border: none;
+.create-channel-modal-input {
+  width: 100%;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: 4px;
-  background-color: #f2f2f2;
-  font-size: 1rem;
-  color: rgb(117, 106, 106)
+  border: none;
+  background-color: #202225;
+  color: #ffffff;
 }
 
-.modal-button-container {
+.create-channel-modal-button-container {
   display: flex;
   justify-content: flex-end;
 }
 
-.modal-button-container button {
+.create-channel-modal-submit-button {
   background-color: #7289da;
   color: #ffffff;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
   padding: 8px 16px;
-  font-size: 1rem;
+  margin-right: 10px;
   cursor: pointer;
 }
 
-.modal-button-container button:hover {
-  background-color: #677bc4;
-}
-
-.cancel-button {
-    background-color: #f1f1f1;
-    color: #333;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 12px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
- */
-
- .create-server-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-}
-
-.create-server-modal-body {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 90%;
-  padding: 20px;
-}
-
-.create-server-modal-header {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #b9bbbe;
-}
-
-.create-server-modal-description {
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #b9bbbe;
-}
-
-.create-server-modal-input-container {
-  margin-bottom: 20px;
-}
-
-.create-server-modal-server-name-text {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #b9bbbe;
-}
-
-.create-server-modal-image-container {
-  display: flex;
-  align-items: center;
-}
-
-.create-server-modal-image-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #b9bbbe;
-  overflow: hidden;
-  position: relative;
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.create-server-modal-camera-icon {
-  color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.create-server-modal-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.create-server-modal-input {
-  display: none;
-}
-
-.create-server-modal-remove-button {
-  background-color: #dc3545;
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.create-server-modal-remove-button:hover {
-  background-color: #c82333;
-}
-
-.create-server-modal-input[type="text"] {
-  font-size: 16px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.create-server-modal-button-container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.create-server-modal-back-button {
-  background-color: transparent;
-  color: #b9bbbe;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
-  margin-right: 20px;
-}
-
-.create-server-modal-back-button:hover {
-  color: #7289da;
-}
-
-.create-server-modal-submit-button {
+.create-channel-modal-cancel-button {
   background-color: #7289da;
-  color: white;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
   font-size: 16px;
-  font-weight: 600;
-  padding: 8px 12px;
-  border: none
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
 }
