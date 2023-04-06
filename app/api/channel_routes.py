@@ -62,7 +62,7 @@ def delete_channel(serverId, channelId):
 
 
 @channel_routes.route('/<int:channelId>/messages', methods=['GET'])
-# @login_required
+@login_required
 def get_channel_messages(channelId):
   messages = Message.query.filter(Message.channel_id==channelId)
   return {'messages': [message.to_dict() for message in messages]}

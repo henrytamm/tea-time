@@ -30,7 +30,7 @@ def get_one_server(serverId):
 
 
 @server_routes.route("/", methods=["POST"])
-# @login_required
+@login_required
 def create_server():
     """
     Create a new server with a general channel
@@ -77,6 +77,7 @@ def create_server():
 
 
 @server_routes.route("/<int:serverId>", methods=['PUT'])
+@login_required
 def edit_server(serverId):
     """
     Edit server
@@ -107,6 +108,7 @@ def edit_server(serverId):
 
 
 @server_routes.route("/<int:serverId>", methods=["DELETE"])
+@login_required
 def delete_server(serverId):
     """
     Delete server
@@ -123,6 +125,7 @@ def delete_server(serverId):
 
 
 @server_routes.route("/<int:serverId>/channels/new", methods=["POST"])
+@login_required
 def create_channel(serverId):
     """
     Create a new channel in a server
