@@ -79,6 +79,7 @@ export const createServer = (formData) => async (dispatch) => {
         const server = await res.json();
         // console.log('from store', server);
         dispatch(createServerAction(server))
+        return server
     }
     return res
 }

@@ -6,6 +6,7 @@ import UploadImage from "./UploadImage";
 import "./CreateServerModal.css";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const CreateServerModal = () => {
   //rendered in NavServerBar*
@@ -17,6 +18,7 @@ const CreateServerModal = () => {
   const { closeModal } = useModal();
   const user = useSelector((state) => state.session.user);
   const servers = useSelector((state) => state.serverReducer.servers);
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,22 +29,24 @@ const CreateServerModal = () => {
 
     if (serverImg) payload.append("image", serverImg);
 
-    await dispatch(createServer(payload));
+    const createdServer = await dispatch(createServer(payload));
+    console.log('createdserver', createdServer)
+    history.push(`/${createdServer.id}`);
+    closeModal()
     // Sort the server ids in descending order
-    const sortedServerIds = Object.keys(servers).sort((a, b) => b - a);
+    // const sortedServerIds = Object.keys(servers).sort((a, b) => b - a);
 
-    // Get the id of the last created server
-    const lastServerId = sortedServerIds[0];
+    // // Get the id of the last created server
+    // const lastServerId = sortedServerIds[0];
 
-    if (lastServerId) {
-      setCreatedServerUrl(`${lastServerId}`);
-      history.push(`${lastServerId}`);
-      closeModal();
-    } else {
-      console.error("Unable to get the ID of the last created server");
-    }
+    // if (lastServerId) {
+    //   setCreatedServerUrl(`${lastServerId}`);
+    //   history.push(`${lastServerId}`);
+    //   closeModal();
+    // } else {
+    //   console.error("Unable to get the ID of the last created server");
+    // }
   };
-
 
   const updateFile = (e) => {
     const file = e.target.files[0];
@@ -98,7 +102,7 @@ const CreateServerModal = () => {
       handleSubmit(e);
     }
   };
-  
+
   return (
     <div className="create-server-modal">
       <div className="create-server-modal-body">
