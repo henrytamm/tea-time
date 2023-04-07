@@ -16,19 +16,6 @@
   cursor: pointer;
 }
 
-/* .nav-bar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 120px;
-  background-color: #2f3136;
-  border-right: 1px solid #40444b;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-} */
-
 .server-list {
   flex: 1;
   overflow-y: auto;

@@ -115,3 +115,7 @@
 .edit-server-modal-submit-button:hover {
   background-color: #677bc4;
 }
+
+.edit-server-modal-name-input{
+  width: 200px;
+}

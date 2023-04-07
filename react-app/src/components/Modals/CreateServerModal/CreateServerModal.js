@@ -33,64 +33,12 @@ const CreateServerModal = () => {
     console.log('createdserver', createdServer)
     history.push(`/${createdServer.id}`);
     closeModal()
-    // Sort the server ids in descending order
-    // const sortedServerIds = Object.keys(servers).sort((a, b) => b - a);
-
-    // // Get the id of the last created server
-    // const lastServerId = sortedServerIds[0];
-
-    // if (lastServerId) {
-    //   setCreatedServerUrl(`${lastServerId}`);
-    //   history.push(`${lastServerId}`);
-    //   closeModal();
-    // } else {
-    //   console.error("Unable to get the ID of the last created server");
-    // }
   };
 
   const updateFile = (e) => {
     const file = e.target.files[0];
     setServerImg(file);
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const payload = {
-  //     name: name,
-  //     server_img: serverImg,
-  //   };
-
-  //   await dispatch(createServer(payload));
-  //   dispatch(getUserServers(user.id))
-  //   closeModal();
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const payload = {
-  //     name: name,
-  //     server_img: serverImg,
-  //   };
-
-  //   await dispatch(createServer(payload));
-
-  //   // Get the updated list of servers
-  //   await dispatch(getUserServers(user.id));
-
-  //   // Sort the server ids in descending order
-  //   const sortedServerIds = Object.keys(servers).sort((a, b) => b - a);
-
-  //   // Get the id of the last created server
-  //   const lastServerId = sortedServerIds[0];
-
-  //   if (lastServerId) {
-  //     setCreatedServerUrl(`${lastServerId}`);
-  //     history.push(`${lastServerId}`);
-  //     closeModal();
-  //   } else {
-  //     console.error("Unable to get the ID of the last created server");
-  //   }
-  // };
 
   const handleCancel = () => {
     closeModal();
@@ -153,6 +101,7 @@ const CreateServerModal = () => {
               onChange={(e) => setName(e.target.value)}
               onKeyDown={handleKeyDown}
               required
+              className="create-server-modal-name-input"
             />
           </div>
           <div className="create-server-modal-button-container">

@@ -92,6 +92,7 @@ return (
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="edit-server-modal-name-input"
           />
         </div>
         <div className="edit-server-modal-button-container">
