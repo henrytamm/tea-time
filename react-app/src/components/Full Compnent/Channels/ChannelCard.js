@@ -34,31 +34,33 @@ const ChannelCard = ({ channel, serverId }) => {
 
   return (
     <div className="header">
-      <NavLink className="channel-card-main" to={`/${serverId}/${channel.id}/`}>
-        <div className="channel-names">
-          <li className="channel-card-name">
-            {"#"}
-            {channel.name}
-          </li>
-          {isOwner && (
-            <div className="edit-channel-btn">
-              <OpenModalButton
-                buttonText={<i class="fa-solid fa-pencil" style={{color: "grey"}}></i>}
-                modalComponent={<EditChannelModal channel={channel} />}
-              />
-            </div>
-          )}
-          {isOwner && (
-            <button
-              className="delete-channel-btn"
-              onClick={deleteChannelHandler}
-            >
-              <i class="fa-solid fa-trash-can" style={{ color: "grey" }}></i>
-            </button>
-          )}
-        </div>
-      </NavLink>
+  <NavLink className="channel-card-main" to={`/${serverId}/${channel.id}/`}>
+    <div className="channel-names">
+      <div className="channel-card-name-container">
+        <li className="channel-card-name">
+          {"#"}
+          {channel.name}
+        </li>
+        {isOwner && (
+          <div className="edit-channel-btn">
+            <OpenModalButton
+              buttonText={<i class="fa-solid fa-pencil" style={{color: "grey"}}></i>}
+              modalComponent={<EditChannelModal channel={channel} />}
+            />
+          </div>
+        )}
+      </div>
+      {isOwner && (
+        <button
+          className="delete-channel-btn"
+          onClick={deleteChannelHandler}
+        >
+          <i class="fa-solid fa-trash-can" style={{ color: "grey" }}></i>
+        </button>
+      )}
     </div>
+  </NavLink>
+</div>
   );
 };
 

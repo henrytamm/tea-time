@@ -51,7 +51,7 @@ const ChannelList = () => {
     if (deleteConfirm) {
       dispatch(deleteServer(serverId)).then(() => {
         setIsServerDeleted(true);
-        history.push(`/`);
+        history.push(`/servers`);
       });
     }
   };

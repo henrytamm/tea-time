@@ -21,6 +21,11 @@
   flex-wrap: wrap;
 }
 
+.channel-card-name-container {
+  display: flex;
+  align-items: center;
+}
+
 .channel-card-name {
   white-space: normal;
   word-break: break-word;
@@ -40,6 +45,6 @@
   color: red;
 }
 
-.edit-channel-btn{
-  margin-left: 60px;
+.edit-channel-btn {
+  margin-left: 10px;
 }

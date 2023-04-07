@@ -11,6 +11,9 @@ import MessageList from "./components/Full Compnent/Chatbox/MessageList";
 import NavServerBar from "./components/Navigation/NavServerBar";
 import ServerTab from "./components/Full Compnent/Server/ServerTab";
 import AllServers from "./components/AllServers/AllServers";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import LoginFormModal from "./components/LoginFormModal";
+import SignUpForm from "./components/SignupFormModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,20 +28,20 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route path="/login" >
-            <LoginFormPage />
+            <LoginFormModal />
           </Route>
           <Route path="/signup">
-            <SignupFormPage />
+            <SignUpForm />
           </Route>
-          <Route exact path="/servers">
+          <ProtectedRoute exact path="/servers">
             <AllServers />
-          </Route>
-          <Route exact path="/:serverId">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/:serverId">
             <ServerTab />
-          </Route>
-          <Route exact path="/:serverId/:channelId?">
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/:serverId/:channelId?">
             <ServerTab />
-          </Route>
+          </ProtectedRoute>
           <Route path="/">
             <Homepage />
           </Route>

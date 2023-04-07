@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editServer } from "../../../store/servers";
 import { useModal } from "../../../context/Modal";
 import UploadImage from "../CreateServerModal/UploadImage";
 import "./EditServerModal.css";
 
 const EditServerModal = ({ serverId, closeModal }) => {
-  const [name, setName] = useState("");
+  const server = useSelector((state) => state.serverReducer.server)
+  const [name, setName] = useState(server.name);
   const [serverImg, setServerImg] = useState("");
   const dispatch = useDispatch();
 
