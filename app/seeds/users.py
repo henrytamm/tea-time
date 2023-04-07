@@ -9,7 +9,7 @@ def seed_users():
         username='Demo', 
         email='demo@aa.io', 
         password='password', 
-        profile_img="https://i.imgur.com/sfXw8tx.png"
+        profile_img="https://imgs.search.brave.com/8JC0OXqH0Fnn1woNauwxFUXizaH3_-tVVT6FhSyCeko/rs:fit:625:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4x/YThSd18yaVhXNEhF/OVBDNmFseE13SGFG/biZwaWQ9QXBp"
         )
     
     marnie = User(
@@ -17,7 +17,7 @@ def seed_users():
         username='marnie', 
         email='marnie@aa.io', 
         password='password', 
-        profile_img="https://i.imgur.com/sizKTVY.png"
+        profile_img="https://imgs.search.brave.com/CXv-QNT6lWeau9eU0_ShC1bOShQERP1CSbgWhFzKdlk/rs:fit:355:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5I/SkVnVW91NURKRVBE/UncwWi1mS1JBSGFK/NCZwaWQ9QXBp"
     )
     
     bobbie = User(
@@ -25,7 +25,7 @@ def seed_users():
         username='bobbie', 
         email='bobbie@aa.io', 
         password='password', 
-        profile_img="https://i.imgur.com/hklIION.png"
+        profile_img="https://imgs.search.brave.com/Dtw0cFOFoSPaT0eyLtYqP2_teZf83ojH_2UcSq0wGnw/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5k/MExVYldEUC14TDdr/dW42bTNHbDVBSGFI/YSZwaWQ9QXBp"
     )
 
     db.session.add(demo)

@@ -27,6 +27,10 @@ def seed_server_members():
         user_id=3,
         server_id=1,
     )
+    demo7 = ServerMember(
+        user_id=1,
+        server_id=4
+    )
 
     db.session.add(demo1)
     db.session.add(demo2)
@@ -34,6 +38,7 @@ def seed_server_members():
     db.session.add(demo4)
     db.session.add(demo5)
     db.session.add(demo6)
+    db.session.add(demo7)
     db.session.commit()
 
 def undo_server_members():
