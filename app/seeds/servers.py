@@ -2,21 +2,27 @@ from app.models import Server, db, environment, SCHEMA, User
 from sqlalchemy.sql import text
 
 def seed_servers():
+
+    may_cohort = Server (
+        name="App Academy May 2022 Cohort",
+        server_img='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDAOadBLnEEEoNEuw1XIGqsFra6FlPNNOuAw&usqp=CAU',
+        owner_id=1
+    )
     gossip_girls = Server (
         name="Gossip Girls",
-        server_img="https://imgs.search.brave.com/WpXXhLg5kTkTbkY0xrTqPNqz3HETaKaxucpmqmpsQtg/rs:fit:1200:1200:1/g:ce/aHR0cDovLzMuYnAu/YmxvZ3Nwb3QuY29t/Ly1XWDMtS3dCY0ps/VS9VTTVERHhGVkFh/SS9BQUFBQUFBQ0pq/WS8ycmU3RV9WODJS/cy9zMTYwMC9nb3Nz/aXBfZ2lybF9wb3N0/ZXI2My5qcGc",
+        server_img="https://imgs.search.brave.com/FDIGQN45eN0Hrme3_HaoVsN81q0RNWFqpY8buGeXxMU/rs:fit:841:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5B/Ujd3YnZzLU9fTERv/SklCQk41UVNRSGFF/TCZwaWQ9QXBp",
         owner_id=1
     )
 
     tea_time = Server (
         name="Tea Time",
-        server_img="https://imgs.search.brave.com/WLytVuuuWZTBsOa6MzilBdH_opbyV_MFQ_myj4cAWwo/rs:fit:641:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC55/TnhUQ05EUHNYVjU2/dkRXNmRHbjdnSGFG/ZSZwaWQ9QXBp",
+        server_img="https://imgs.search.brave.com/gCiJ0ClK0knQnCY6KJXa5Y4sExkMwY4cAPYRFRIr_ZI/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5I/OU44Qm5vcnptMFNZ/Y1l2YVdvQUR3SGFI/YSZwaWQ9QXBp",
         owner_id=2
     )
 
-    last_straw = Server (
-        name= "Last Straw",
-        server_img="https://imgs.search.brave.com/Dtxff8JgqvU1OADohatsm3phQi_OTguvMVxq6e77JQ0/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9saDQu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tLy14/b01lbE9JdnVpay9U/WFpVcXdSV1UtSS9B/QUFBQUFBQUJLUS8w/RG1DVkxWM0pBVS9z/MTYwMC9OZW9uLUZs/ZXhpYmxlLURyaW5r/aW5nLVN0cmF3Lmpw/Zw",
+    yake = Server (
+        name= "Pouring one out for Yake",
+        server_img='https://imgs.search.brave.com/XdAGBra5Gg1Jtbn9ZdZgaPuzHZ6YlUVlBE-7VTES-IY/rs:fit:128:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5M/dkZmSUFjTDB2V29v/OGFvWElzVTh3QUFB/QSZwaWQ9QXBp',
         owner_id=1
     )
 
@@ -32,9 +38,10 @@ def seed_servers():
         owner_id=1
     )
 
+    db.session.add(may_cohort)
     db.session.add(gossip_girls)
     db.session.add(tea_time)
-    db.session.add(last_straw)
+    db.session.add(yake)
     db.session.add(app_academy)
     db.session.add(therapy_session)
 

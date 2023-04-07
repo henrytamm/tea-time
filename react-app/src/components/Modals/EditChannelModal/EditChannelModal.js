@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import "./EditChannelModal.css";
 
 const EditChannelModal = ({ channel }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(channel.name);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const { serverId, channelId } = useParams();
@@ -42,8 +42,8 @@ const EditChannelModal = ({ channel }) => {
             />
           </div>
           <div className="edit-channel-modal-button-container">
-            <button className="edit-channel-modal-submit-button" type="submit">Save</button>
             <button className="edit-channel-modal-cancel-button" type="button" onClick={closeModal}>Cancel</button>
+            <button className="edit-channel-modal-submit-button" type="submit">Save</button>
           </div>
         </form>
       </div>

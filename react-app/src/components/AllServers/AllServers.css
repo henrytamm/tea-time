@@ -5,6 +5,7 @@
   width: 100%;
   margin-top: 1.5rem;
   background-color: #36393f;
+  height: 100%;
 }
 
 .all-servers-header {
@@ -52,7 +53,6 @@
 .nav-server-bar-in-all-servers {
   position: absolute;
   width: 120px;
-  height: 100%;
   background-color: #36393f;
   border-right: 1px solid #36393f;
   display: flex;

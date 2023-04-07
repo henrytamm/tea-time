@@ -3,23 +3,23 @@ from sqlalchemy.sql import text
 
 def seed_channels():
     channel1 = Channel(
-        server_id = 1,
+        server_id = 2,
         name="general",
     )
 
     channel2 = Channel(
-        server_id = 1,
+        server_id = 2,
         name="gossip",
     )
 
     channel3 = Channel(
-        server_id = 1,
+        server_id = 2,
         name="spill the tea"
     )
 
     channel4 = Channel(
         server_id = 2,
-        name="general"
+        name="party"
     )
 
     channel5 = Channel(
@@ -37,6 +37,26 @@ def seed_channels():
         name="wassup"
     )
 
+    channel8 = Channel(
+        server_id = 1,
+        name="general"
+    )
+
+    channel9 = Channel(
+        server_id = 1,
+        name="test-answers"
+    )
+
+    channel10 = Channel(
+        server_id = 4,
+        name="general"
+    )
+
+    channel11 = Channel(
+        server_id = 4,
+        name="thanks yake"
+    )
+
     db.session.add(channel1)
     db.session.add(channel2)
     db.session.add(channel3)
@@ -44,6 +64,10 @@ def seed_channels():
     db.session.add(channel5)
     db.session.add(channel6)
     db.session.add(channel7)
+    db.session.add(channel8)
+    db.session.add(channel9)
+    db.session.add(channel10)
+    db.session.add(channel11)
     db.session.commit()
 
 def undo_channels():

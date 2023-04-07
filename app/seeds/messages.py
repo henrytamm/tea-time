@@ -7,7 +7,6 @@ def seed_messages():
         channel_id = 1,
         user_id = 1,
         message="bork bork",
-        img="https://imgs.search.brave.com/b7MiiBoqJbjmNv6oTSfZhT2_CsL6MHR-myoARI36WEM/rs:fit:423:236:1/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvZW4vYS9hZi9H/b3NzaXBfR2lybF9B/Y2FwdWxjb190aXRs/ZV9jYXJkLmpwZw",
         created_at=datetime.utcnow()
     )
 
