@@ -30,7 +30,7 @@ const CreateServerModal = () => {
     if (serverImg) payload.append("image", serverImg);
 
     const createdServer = await dispatch(createServer(payload));
-    console.log('createdserver', createdServer)
+    // console.log('createdserver', createdServer)
     history.push(`/${createdServer.id}`);
     closeModal()
   };

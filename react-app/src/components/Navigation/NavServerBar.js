@@ -23,7 +23,6 @@ function NavServerBar() {
       dispatch(getUserServers(user.id));
     }
   }, [dispatch, user]);
-  console.log(channels)
 
   const handleLogout = () => {
     history.push("/");

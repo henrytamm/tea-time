@@ -60,7 +60,7 @@ const MessageList = () => {
     return () => setIsLoaded(false);
   }, [oldRoom, newRoom, isLoaded]);
 
-  console.log(socketMessages);
+  // console.log(socketMessages);
 
   return (
     <>
