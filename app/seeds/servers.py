@@ -6,7 +6,7 @@ def seed_servers():
     may_cohort = Server (
         name="App Academy May 2022 Cohort",
         server_img='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDAOadBLnEEEoNEuw1XIGqsFra6FlPNNOuAw&usqp=CAU',
-        owner_id=1
+        owner_id=2
     )
     gossip_girls = Server (
         name="Gossip Girls",
