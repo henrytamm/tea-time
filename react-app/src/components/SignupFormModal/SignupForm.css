@@ -51,6 +51,7 @@
   color: #7289da;
   font-size: 36px;
   margin: auto;
+  cursor: pointer;
 }
 
 .signup-form-input {

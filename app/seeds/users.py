@@ -9,28 +9,74 @@ def seed_users():
         username='Demo', 
         email='demo@aa.io', 
         password='password', 
-        profile_img="https://imgs.search.brave.com/8JC0OXqH0Fnn1woNauwxFUXizaH3_-tVVT6FhSyCeko/rs:fit:625:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4x/YThSd18yaVhXNEhF/OVBDNmFseE13SGFG/biZwaWQ9QXBp"
+        profile_img="https://emoji.discadia.com/emojis/3330c367-64c8-4149-a93c-85ec125ffc5b.gif"
         )
     
-    marnie = User(
+    henry = User(
         id= 2,
-        username='marnie', 
-        email='marnie@aa.io', 
+        username='henry', 
+        email='henry@aa.io', 
         password='password', 
-        profile_img="https://imgs.search.brave.com/CXv-QNT6lWeau9eU0_ShC1bOShQERP1CSbgWhFzKdlk/rs:fit:355:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5I/SkVnVW91NURKRVBE/UncwWi1mS1JBSGFK/NCZwaWQ9QXBp"
+        profile_img="https://emoji.discadia.com/emojis/9c8f3ce5-1530-4f03-b138-88ae1f5ec881.PNG"
     )
     
-    bobbie = User(
+    anthony = User(
         id = 3, 
-        username='bobbie', 
-        email='bobbie@aa.io', 
+        username='Anthony', 
+        email='anthony@aa.io', 
         password='password', 
-        profile_img="https://imgs.search.brave.com/Dtw0cFOFoSPaT0eyLtYqP2_teZf83ojH_2UcSq0wGnw/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5k/MExVYldEUC14TDdr/dW42bTNHbDVBSGFI/YSZwaWQ9QXBp"
+        profile_img="https://i.imgflip.com/502xol.jpg"
+    )
+
+    alex = User(
+        id = 4, 
+        username='Alex', 
+        email='alex@aa.io', 
+        password='password', 
+        profile_img="https://pbs.twimg.com/media/Eu4yJF6UcAAY6Kv.jpg"
+    )
+
+    minh = User(
+        id = 5, 
+        username='Minh', 
+        email='minh@aa.io', 
+        password='password', 
+        profile_img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr417m6PlE-4Mb1ujFebl__vQUqW7F8_mHnWF8tMDs-w&usqp=CAU&ec=48665699"
+    )
+
+    rachel = User(
+        id = 6, 
+        username='Rachel', 
+        email='rachel@aa.io', 
+        password='password', 
+        profile_img="https://ca.slack-edge.com/T03GU501J-U03DSQYR202-50654b162f22-512"
+    )
+
+    yuan = User(
+        id = 7, 
+        username='Yuan', 
+        email='yuan@aa.io', 
+        password='password', 
+        profile_img="https://media.licdn.com/dms/image/C5603AQGPyWKronmJkA/profile-displayphoto-shrink_400_400/0/1532980177949?e=1686182400&v=beta&t=SyXA8fVX-2WWo6qXNewswMbepvZsIgyRUIMfM12Jzmk"
+    )
+    
+    heidi = User(
+        id = 8,
+        username='Heidi',
+        email='heidi@aa.io',
+        password='password',
+        profile_img="https://previews.dropbox.com/p/thumb/AB38NdaGkWWNTG6npaC2pjsNNfy2VkVtLMbsFM54x1tZq296afjCugYU0lB7Cz-vR7VHKyS-eR_wKSowjP7gqW3YKZB6tbAr-FbjB6Y1ejYdgRqLMK6U6pcDaGIqOrN_W_WH_vgGXyeCnEqhgjHFeKG6kmCE0DaxeXg6gwrtd3VASqCeDYV7mntmEkqfxHp3K9Q1kNh3nf5CEjSiBZL1UXpUg0J2UT03TajxBIaNCPf361MeFmfQs6eMRpXQSdbw0UJeLnITBR8rZc7ds29W0PViT7pub-B08OWwJ2BFd-A3kzYwPi1-0tviSEq_nTol8O5KiC4cfBNYhKpOLctmBCMOv0MUmmi6JbaLJTy881bwQiYwKZ6bFPnowVN0xgIukMo/p.jpeg?size=256x256&size_mode=2"
     )
 
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(henry)
+    db.session.add(anthony)
+    db.session.add(alex)
+    db.session.add(minh)
+    db.session.add(rachel)
+    db.session.add(yuan)
+    db.session.add(heidi)
+
     db.session.commit()
 
 

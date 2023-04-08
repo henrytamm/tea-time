@@ -4,37 +4,65 @@ from datetime import datetime
 
 def seed_messages():
     message1 = Message(
-        channel_id = 1,
+        channel_id = 8,
         user_id = 1,
-        message="bork bork",
+        message="AHHHHHH",
         created_at=datetime.utcnow()
     )
 
     message2 = Message(
-        channel_id = 1,
+        channel_id = 8,
         user_id = 2,
-        message="arf bork",
+        message="everythings broken idk",
         created_at=datetime.utcnow()
     )
 
     message3 = Message(
-        channel_id = 1,
+        channel_id = 8,
         user_id = 3,
-        message="woof",
+        message="im already done",
         created_at=datetime.utcnow()
     )
 
     message4= Message(
-        channel_id = 2,
-        user_id = 1,
-        message="woof woof",
+        channel_id = 8,
+        user_id = 4,
+        message="im unwell",
         created_at=datetime.utcnow()
     )
 
     message5= Message(
-        channel_id = 1,
+        channel_id = 8,
+        user_id = 5,
+        message="im hungover",
+        created_at=datetime.utcnow()
+    )
+
+    message6= Message(
+        channel_id = 9,
         user_id = 1,
-        message="bark",
+        message="im snitching",
+        created_at=datetime.utcnow()
+    )
+
+    message7= Message(
+        channel_id = 8,
+        user_id = 6,
+        message="wait, am I the only one using express?",
+        created_at=datetime.utcnow()
+    )
+
+    message8= Message(
+        channel_id = 8,
+        user_id = 7,
+        message="i hate filing my taxes",
+        created_at=datetime.utcnow()
+    )
+
+    message9= Message(
+        channel_id = 8,
+        user_id = 8,
+        message="my puppy has all my attention right now!",
         created_at=datetime.utcnow()
     )
 
@@ -43,6 +71,10 @@ def seed_messages():
     db.session.add(message3)
     db.session.add(message4)
     db.session.add(message5)
+    db.session.add(message6)
+    db.session.add(message7)
+    db.session.add(message8)
+    db.session.add(message9)
     db.session.commit()
 
 def undo_messages():
