@@ -66,6 +66,20 @@ def seed_messages():
         created_at=datetime.utcnow()
     )
 
+    message10= Message(
+        channel_id = 8,
+        user_id = 9,
+        message="crazy seeing you guys here",
+        created_at=datetime.utcnow()
+    )
+
+    message11= Message(
+        channel_id = 8,
+        user_id = 10,
+        message="fsdklfajsflkjasdfaslj sorry my cat jumped on my keyboard",
+        created_at=datetime.utcnow()
+    )
+
     db.session.add(message1)
     db.session.add(message2)
     db.session.add(message3)
@@ -75,6 +89,8 @@ def seed_messages():
     db.session.add(message7)
     db.session.add(message8)
     db.session.add(message9)
+    db.session.add(message10)
+    db.session.add(message11)
     db.session.commit()
 
 def undo_messages():

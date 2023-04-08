@@ -33,7 +33,7 @@ def seed_users():
         username='Alex', 
         email='alex@aa.io', 
         password='password', 
-        profile_img="https://pbs.twimg.com/media/Eu4yJF6UcAAY6Kv.jpg"
+        profile_img="https://i.imgur.com/X6q7UPN.jpg"
     )
 
     minh = User(
@@ -57,7 +57,7 @@ def seed_users():
         username='Yuan', 
         email='yuan@aa.io', 
         password='password', 
-        profile_img="https://media.licdn.com/dms/image/C5603AQGPyWKronmJkA/profile-displayphoto-shrink_400_400/0/1532980177949?e=1686182400&v=beta&t=SyXA8fVX-2WWo6qXNewswMbepvZsIgyRUIMfM12Jzmk"
+        profile_img="https://i.imgur.com/62inBOd.jpg"
     )
     
     heidi = User(
@@ -65,7 +65,23 @@ def seed_users():
         username='Heidi',
         email='heidi@aa.io',
         password='password',
-        profile_img="https://previews.dropbox.com/p/thumb/AB38NdaGkWWNTG6npaC2pjsNNfy2VkVtLMbsFM54x1tZq296afjCugYU0lB7Cz-vR7VHKyS-eR_wKSowjP7gqW3YKZB6tbAr-FbjB6Y1ejYdgRqLMK6U6pcDaGIqOrN_W_WH_vgGXyeCnEqhgjHFeKG6kmCE0DaxeXg6gwrtd3VASqCeDYV7mntmEkqfxHp3K9Q1kNh3nf5CEjSiBZL1UXpUg0J2UT03TajxBIaNCPf361MeFmfQs6eMRpXQSdbw0UJeLnITBR8rZc7ds29W0PViT7pub-B08OWwJ2BFd-A3kzYwPi1-0tviSEq_nTol8O5KiC4cfBNYhKpOLctmBCMOv0MUmmi6JbaLJTy881bwQiYwKZ6bFPnowVN0xgIukMo/p.jpeg?size=256x256&size_mode=2"
+        profile_img="https://i.imgur.com/nvmZ74l.jpg"
+    )
+
+    yake = User(
+        id = 9,
+        username='Yake',
+        email='yake@aa.io',
+        password='password',
+        profile_img="https://i.imgur.com/ajeLPYL.png"
+    )
+
+    gabe = User(
+        id = 10,
+        username='Gabe',
+        email='gabe@aa.io',
+        password='password',
+        profile_img="https://i.imgur.com/PH81BFg.jpg"
     )
 
     db.session.add(demo)
@@ -76,6 +92,8 @@ def seed_users():
     db.session.add(rachel)
     db.session.add(yuan)
     db.session.add(heidi)
+    db.session.add(yake)
+    db.session.add(gabe)
 
     db.session.commit()
 
