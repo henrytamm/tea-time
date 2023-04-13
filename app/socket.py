@@ -28,3 +28,7 @@ def on_join(data):
 @socketio.on("leave_room")
 def on_leave(data):
     leave_room(data["room"])
+
+@socketio.on("edit_message")
+def handle_edit_message(data):
+    emit("edit_message", data, room=data['room'])

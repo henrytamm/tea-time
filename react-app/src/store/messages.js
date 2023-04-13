@@ -1,6 +1,7 @@
 const GET_MESSAGES = "messages/GET_MESSAGES";
 const CREATE_MESSAGE = "messages/CREATE_MESSAGE"
 const CLEAR_MESSAGES = "messages/CLEAR_MESSAGES";
+const EDIT_MESSAGE = "messages/EDIT_MESSAGE"
 
 const getMessagesAction = (messages) => ({
   type: GET_MESSAGES,
@@ -15,6 +16,13 @@ const createMessageAction = (message) => ({
 const clearMessagesAction = () => ({
   type: CLEAR_MESSAGES,
 });
+
+const editMessageAction = (message) => {
+  return {
+    type: EDIT_MESSAGE,
+    message,
+  };
+};
 
 export const getMessages = (channelId) => async (dispatch) => {
   const res = await fetch(`/api/servers/${channelId}/messages`);
@@ -46,6 +54,20 @@ export const clearAllMessages = () => async (dispatch) => {
   dispatch(clearMessagesAction());
 };
 
+export const editMessage = (message) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${message.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
+  });
+
+  if (res.ok) {
+    const updatedMessage = await res.json();
+    dispatch(editMessageAction(updatedMessage));
+  }
+  return res;
+};
+
 const initialState = {};
 
 export const messageReducer = (state = initialState, action) => {
@@ -66,6 +88,11 @@ export const messageReducer = (state = initialState, action) => {
 
     case CLEAR_MESSAGES: {
       newState = {};
+      return newState;
+    }
+
+    case EDIT_MESSAGE: {
+      newState[action.message.id] = action.message;
       return newState;
     }
 

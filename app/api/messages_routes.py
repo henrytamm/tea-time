@@ -30,3 +30,14 @@ def create_message(channelId):
     db.session.add(message)
     db.session.commit()
     return jsonify(message.to_dict())
+
+@message_routes.route('/<int:messageId>', methods=['PUT'])
+@login_required
+def edit_channel_message(messageId):
+  message = Message.query.get(messageId)
+  form = MessageForm()
+
+  if current_user.id == message.user_id:
+    message.message = form.data["message"]
+    db.session.commit()
+    return jsonify(message.to_dict())

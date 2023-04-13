@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -8,57 +8,74 @@ import MessageCard from "./MessageCard";
 import { io } from "socket.io-client";
 import "./MessageList.css";
 
-let socket;
-
 const MessageList = () => {
   const dispatch = useDispatch();
   const { channelId } = useParams();
-  const [oldRoom, setOldRoom] = useState(`${channelId}`);
-  const [newRoom, setNewRoom] = useState();
+  const socketRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [socketMessages, setSocketMessages] = useState([]);
 
   useEffect(() => {
-    dispatch(getMessages(channelId)).then((messages) =>
-      setSocketMessages(messages)
-    );
-
-    socket = io();
-
-    socket.on("message", (message) => {
-      setSocketMessages((messages) => [...messages, message.newMessage]);
+    dispatch(getMessages(channelId)).then((messages) => {
+      setSocketMessages(messages);
     });
 
-    setNewRoom(`${channelId}`);
+    socketRef.current = io();
+
+    socketRef.current.on("message", (message) => {
+      // console.log("create message", message);
+      setSocketMessages((prevMessages) => [
+        ...prevMessages,
+        message.newMessage,
+      ]);
+    });
+
+    socketRef.current.on("edit_message", (editedMessage) => {
+      // console.log("edit message", editedMessage);
+      setSocketMessages((prevMessages) => {
+        const newMessages = prevMessages.map((msg) => {
+          if (msg.id === editedMessage.messageId) {
+            return { ...msg, message: editedMessage.newMessage.message };
+          }
+          return msg;
+        });
+        return newMessages;
+      });
+    });
 
     return () => {
-      socket.disconnect();
+      socketRef.current.disconnect();
       dispatch(clearAllMessages());
     };
   }, [dispatch, channelId]);
 
   useEffect(() => {
+    const newRoom = `${channelId}`;
+    const oldRoom = socketRef.current ? socketRef.current.id : null;
+
     const joinRoom = (room) => {
-      socket.emit("join_room", { room: newRoom });
+      if (socketRef.current) {
+        socketRef.current.emit("join_room", { room });
+      }
     };
 
     const leaveRoom = (room) => {
-      socket.emit("leave_room", { room: oldRoom });
+      if (socketRef.current) {
+        socketRef.current.emit("leave_room", { room });
+      }
     };
-    // console.log('this is joinroom', joinRoom)
-    // console.log('this is leave room', leaveRoom)
-    // console.log('should be true', isLoaded)
 
     if (isLoaded) {
-      leaveRoom(oldRoom);
-      joinRoom(newRoom);
-      setOldRoom(newRoom);
+      if (oldRoom !== newRoom) {
+        leaveRoom(oldRoom);
+        joinRoom(newRoom);
+      }
     }
 
     setIsLoaded(true);
 
     return () => setIsLoaded(false);
-  }, [oldRoom, newRoom, isLoaded]);
+  }, [channelId, isLoaded]);
 
   // console.log(socketMessages);
 
@@ -69,11 +86,18 @@ const MessageList = () => {
           <ul className="all-messages-container">
             {Array.isArray(socketMessages) &&
               socketMessages.map((message) => (
-                <MessageCard key={message.id} message={message} />
+                <MessageCard
+                  key={message.id}
+                  message={message}
+                  socket={socketRef.current}
+                  setSocketMessages={setSocketMessages}
+                  socketMessages={socketMessages}
+                  newRoom={channelId}
+                />
               ))}
           </ul>
           <section className="message-input-container">
-            <MessageInput socket={socket} newRoom={newRoom} />
+            <MessageInput socket={socketRef.current} newRoom={channelId} />
           </section>
         </div>
       )}
