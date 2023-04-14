@@ -1,7 +1,8 @@
 const GET_MESSAGES = "messages/GET_MESSAGES";
-const CREATE_MESSAGE = "messages/CREATE_MESSAGE"
+const CREATE_MESSAGE = "messages/CREATE_MESSAGE";
 const CLEAR_MESSAGES = "messages/CLEAR_MESSAGES";
-const EDIT_MESSAGE = "messages/EDIT_MESSAGE"
+const EDIT_MESSAGE = "messages/EDIT_MESSAGE";
+const DELETE_MESSAGE = "messages/DELETE_MESSAGE";
 
 const getMessagesAction = (messages) => ({
   type: GET_MESSAGES,
@@ -9,9 +10,9 @@ const getMessagesAction = (messages) => ({
 });
 
 const createMessageAction = (message) => ({
-    type: CREATE_MESSAGE,
-    message
-})
+  type: CREATE_MESSAGE,
+  message,
+});
 
 const clearMessagesAction = () => ({
   type: CLEAR_MESSAGES,
@@ -24,12 +25,17 @@ const editMessageAction = (message) => {
   };
 };
 
+const deleteMessageAction = (message) => ({
+  type: DELETE_MESSAGE,
+  message,
+});
+
 export const getMessages = (channelId) => async (dispatch) => {
   const res = await fetch(`/api/servers/${channelId}/messages`);
   if (res.ok) {
     const data = await res.json();
     dispatch(getMessagesAction(data.messages));
-    return data.messages
+    return data.messages;
   }
   return res;
 };
@@ -49,7 +55,6 @@ export const createNewMessage = (message, channelId) => async (dispatch) => {
   return res;
 };
 
-
 export const clearAllMessages = () => async (dispatch) => {
   dispatch(clearMessagesAction());
 };
@@ -68,6 +73,17 @@ export const editMessage = (message) => async (dispatch) => {
   return res;
 };
 
+export const deleteMessage = (message) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${message.id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteMessageAction(message.id));
+  }
+  return res;
+};
+
 const initialState = {};
 
 export const messageReducer = (state = initialState, action) => {
@@ -75,7 +91,7 @@ export const messageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MESSAGES: {
       newState = {};
-       action.messages.forEach((message) => {
+      action.messages.forEach((message) => {
         newState[message.id] = message;
       });
       return newState;
@@ -93,6 +109,11 @@ export const messageReducer = (state = initialState, action) => {
 
     case EDIT_MESSAGE: {
       newState[action.message.id] = action.message;
+      return newState;
+    }
+
+    case DELETE_MESSAGE: {
+      delete newState[action.message];
       return newState;
     }
 

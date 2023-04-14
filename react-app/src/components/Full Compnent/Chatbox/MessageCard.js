@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import defaultDiscord from "../../../images/defaultDiscord.png";
 import { useDispatch } from "react-redux";
-import { editMessage } from "../../../store/messages";
+import { editMessage, deleteMessage } from "../../../store/messages";
 import { useSelector } from "react-redux";
 import "./MessageCard.css";
 
@@ -13,8 +13,6 @@ const MessageCard = ({
   newRoom,
 }) => {
   const currentUser = useSelector((state) => state.session.user);
-  console.log(currentUser);
-  console.log(message.userId.id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.message);
   const dispatch = useDispatch();
@@ -69,6 +67,18 @@ const MessageCard = ({
       // console.log("success");
     });
   };
+  const handleDelete = () => {
+    dispatch(deleteMessage(message.id)).then(() => {
+      setSocketMessages(prevMessages => prevMessages.filter(msg => {
+        console.log('msgid', msg.id);
+        return msg.id !== message.id;
+      }));
+      socket.emit('delete_message', {
+        messageId: message.id,
+        room: newRoom,
+      });
+    });
+  };
 
   useEffect(() => {
     const handleEditMessage = ({ messageId, newMessage }) => {
@@ -78,10 +88,21 @@ const MessageCard = ({
       }
     };
 
+    const handleDeleteMessage = ({ messageId }) => {
+      console.log('messageId', messageId)
+      console.log('message.id', message.id)
+      if (messageId === message.id) {
+        setSocketMessages(prevMessages => prevMessages.filter(msg => msg.id !== messageId));
+        console.log('did delete happen', socketMessages)
+      }
+    };
+
     socket.on("edit_message", handleEditMessage);
+    socket.on('delete_message', handleDeleteMessage);
 
     return () => {
       socket.off("edit_message", handleEditMessage);
+      socket.off('delete_message', handleDeleteMessage);
     };
   }, [message.id, socket]);
 
@@ -124,6 +145,11 @@ const MessageCard = ({
                     {message.userId.id === currentUser.id && (
                       <button className="edit-message" onClick={handleEdit}>
                         Edit
+                      </button>
+                    )}
+                    {message.userId.id === currentUser.id && (
+                      <button className="delete-message" onClick={handleDelete}>
+                        Delete
                       </button>
                     )}
                   </div>

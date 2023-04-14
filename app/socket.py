@@ -12,12 +12,16 @@ else:
     origins = "*"
 
 # initialize your socket instance
-socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
+socketio = SocketIO(cors_allowed_origins=origins,
+                    logger=True, engineio_logger=True)
 
 # handle chat messages
+
+
 @socketio.on("message")
 def send_message(data):
     emit("message", data, room=data['room'])
+
 
 @socketio.on("join_room")
 def on_join(data):
@@ -25,10 +29,16 @@ def on_join(data):
     join_room(room)
     emit("join_room", data, broadcast=True)
 
+
 @socketio.on("leave_room")
 def on_leave(data):
     leave_room(data["room"])
 
+
 @socketio.on("edit_message")
 def handle_edit_message(data):
     emit("edit_message", data, room=data['room'])
+
+@socketio.on("delete_message")
+def handle_delete_message(data):
+    emit("delete_message", data, room=data['room'])

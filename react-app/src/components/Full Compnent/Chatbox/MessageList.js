@@ -43,6 +43,12 @@ const MessageList = () => {
       });
     });
 
+    socketRef.current.on("delete_message", (messageId) => {
+      setSocketMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== messageId)
+      );
+    });    
+
     return () => {
       socketRef.current.disconnect();
       dispatch(clearAllMessages());
