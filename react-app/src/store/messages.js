@@ -73,13 +73,13 @@ export const editMessage = (message) => async (dispatch) => {
   return res;
 };
 
-export const deleteMessage = (message) => async (dispatch) => {
-  const res = await fetch(`/api/messages/${message.id}`, {
+export const deleteMessage = (messageId) => async (dispatch) => {
+  const res = await fetch(`/api/messages/${messageId}`, {
     method: "DELETE",
   });
 
   if (res.ok) {
-    dispatch(deleteMessageAction(message.id));
+    dispatch(deleteMessageAction(messageId));
   }
   return res;
 };

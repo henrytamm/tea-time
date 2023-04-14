@@ -46,6 +46,7 @@ def edit_channel_message(messageId):
 @login_required
 def delete_channel_message(messageId):
   message = Message.query.get(messageId)
+  
   if current_user.id == message.user_id:
     db.session.delete(message)
     db.session.commit()
