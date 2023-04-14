@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import defaultDiscord from "../../../images/defaultDiscord.png";
 import { useDispatch } from "react-redux";
 import { editMessage } from "../../../store/messages";
+import { useSelector } from "react-redux";
 import "./MessageCard.css";
 
 const MessageCard = ({
@@ -11,6 +12,9 @@ const MessageCard = ({
   socketMessages,
   newRoom,
 }) => {
+  const currentUser = useSelector((state) => state.session.user);
+  console.log(currentUser);
+  console.log(message.userId.id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message.message);
   const dispatch = useDispatch();
@@ -34,7 +38,9 @@ const MessageCard = ({
   const date = formatDate(message.createdAt, true);
 
   const handleEdit = () => {
-    setIsEditing(true);
+    if (message.userId.id === currentUser.id) {
+      setIsEditing(true);
+    }
   };
 
   const handleCancelEdit = () => {
@@ -64,12 +70,11 @@ const MessageCard = ({
     });
   };
 
-  
   useEffect(() => {
     const handleEditMessage = ({ messageId, newMessage }) => {
       if (messageId === message.id) {
         setEditedMessage(newMessage);
-        console.log('did this go through', newMessage)
+        console.log("did this go through", newMessage);
       }
     };
 
@@ -116,9 +121,11 @@ const MessageCard = ({
                 <>
                   <div className="message-body">{message.message}</div>
                   <div className="message-actions">
-                    <button className="edit-message" onClick={handleEdit}>
-                      Edit
-                    </button>
+                    {message.userId.id === currentUser.id && (
+                      <button className="edit-message" onClick={handleEdit}>
+                        Edit
+                      </button>
+                    )}
                   </div>
                 </>
               )}
