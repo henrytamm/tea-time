@@ -70,7 +70,7 @@ const MessageCard = ({
   const handleDelete = () => {
     dispatch(deleteMessage(message.id)).then(() => {
       setSocketMessages(prevMessages => prevMessages.filter(msg => {
-        console.log('msgid', msg.id);
+        // console.log('msgid', msg.id);
         return msg.id !== message.id;
       }));
       socket.emit('delete_message', {
@@ -84,18 +84,20 @@ const MessageCard = ({
     const handleEditMessage = ({ messageId, newMessage }) => {
       if (messageId === message.id) {
         setEditedMessage(newMessage);
-        console.log("did this go through", newMessage);
+        // console.log("did this go through", newMessage);
       }
     };
 
+
     const handleDeleteMessage = ({ messageId }) => {
-      console.log('messageId', messageId)
-      console.log('message.id', message.id)
       if (messageId === message.id) {
-        setSocketMessages(prevMessages => prevMessages.filter(msg => msg.id !== messageId));
-        console.log('did delete happen', socketMessages)
+        const confirmed = window.confirm('Are you sure you want to delete this message?');
+        if (confirmed) {
+          setSocketMessages(prevMessages => prevMessages.filter(msg => msg.id !== messageId));
+        }
       }
     };
+    
 
     socket.on("edit_message", handleEditMessage);
     socket.on('delete_message', handleDeleteMessage);
@@ -125,7 +127,7 @@ const MessageCard = ({
               {isEditing ? (
                 <>
                   <textarea
-                    className="message-body"
+                    className="message-edit-body"
                     value={editedMessage.message}
                     onChange={(e) => setEditedMessage(e.target.value)}
                   />
@@ -144,12 +146,12 @@ const MessageCard = ({
                   <div className="message-actions">
                     {message.userId.id === currentUser.id && (
                       <button className="edit-message" onClick={handleEdit}>
-                        Edit
+                        <i class="fa-solid fa-pencil"></i>
                       </button>
                     )}
                     {message.userId.id === currentUser.id && (
                       <button className="delete-message" onClick={handleDelete}>
-                        Delete
+                        <i class="fa-solid fa-trash-can"></i>
                       </button>
                     )}
                   </div>

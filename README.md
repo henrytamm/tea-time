@@ -45,7 +45,7 @@ Tea Time is a personal project and my take on creating a live chat application t
         S3_SECRET=<Secret access key>
     ```
 * Navigate to frontend folder called '/tea-time/react-app' through your terminal and type "npm install" then press enter
-* Navigate to root folder called '/yell' through your terminal and type "python --version" then press enter to check your current version of python
+* Navigate to root folder called '/tea-time' through your terminal and type "python --version" then press enter to check your current version of python
 * Run the following command replacing 3.9.4 with your version number of python: pipenv install --python "$PYENV_ROOT/versions/3.9.4/bin/python"
 * Then run this command: pipenv install -r requirements.txt
 * Navigate to root folder through your terminal and type "pipenv shell" then press enter, then run:
