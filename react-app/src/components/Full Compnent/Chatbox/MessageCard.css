@@ -122,3 +122,12 @@
     padding: 8px;
     margin-bottom: 10px;
   }
+
+  .message-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .user-message:hover .message-actions {
+    opacity: 1;
+  }
