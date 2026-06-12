@@ -78,7 +78,7 @@ export const deleteChannel = (serverId, channelId) => async (dispatch) => {
         method: "DELETE"
     })
     if (res.ok) {
-        dispatch(deleteChannelAction)
+        dispatch(deleteChannelAction(channelId))
     }
     return res
 }

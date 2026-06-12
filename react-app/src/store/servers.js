@@ -103,12 +103,12 @@ export const deleteServer = (serverId) => async (dispatch) => {
         method: "DELETE"
     })
     if (res.ok) {
-        dispatch(deleteServerAction)
+        dispatch(deleteServerAction(serverId))
     }
 }
 
 export const joinServer = (serverId) => async (dispatch) => {
-    const res = await fetch (`api/servers/${serverId}/join`, {
+    const res = await fetch (`/api/servers/${serverId}/join`, {
         method: "POST"
     })
     if (res.ok) {
@@ -149,7 +149,7 @@ const initialState = {
   
       case DELETE_SERVER: {
         const newState = { ...state };
-        delete newState.servers[action.server.id];
+        delete newState.servers[action.server];
         return newState;
       }
   

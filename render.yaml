@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: tea-time
+    runtime: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt &&
+      cd react-app && npm install && npm run build
+    startCommand: gunicorn --worker-class gevent -w 1 --bind 0.0.0.0:$PORT "app:app"
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: SCHEMA
+        value: flask_schema
+      - key: CORS_ORIGINS
+        sync: false
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_KEY
+        sync: false
+      - key: S3_SECRET
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.9.18
+      - key: NODE_VERSION
+        value: 16.20.2
