@@ -7,14 +7,14 @@
   }
   
   .nav-server-bar-main {
-    width: 120px;
+    width: 72px;
     height: 100%;
-    background-color: #2f3136;
-    border-right: 1px solid #40444b;
+    background-color: #202225;
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow-y: auto;
-    
+    padding-top: 8px;
   }
   
   .channel-list-main {
